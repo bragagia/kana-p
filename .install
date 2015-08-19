@@ -1,0 +1,10 @@
+post_install() {
+	systemctl enable slim
+	systemctl start slim
+}
+
+pre_remove()
+{
+	systemctl disable slim
+	systemctl stop slim
+}
