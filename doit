@@ -1,0 +1,6 @@
+mkdir tmp
+cp PKGBUILD INSTALL tmp
+cd tmp
+makepkg -sri
+cd ..
+rm -rf tmp

@@ -1,0 +1,3 @@
+[Desktop Entry]
+Name=Gnome with Awesome
+Exec=gnome-session --session=gnome-awesome

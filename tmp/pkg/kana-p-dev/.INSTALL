@@ -8,16 +8,12 @@ pre_upgrade() {
 	systemctl disable slim
 
 	grep -v "#KANA-P" /etc/sudoers > /tmp/kana-p ; mv /tmp/kana-p /etc/sudoers
-
-	sed -i "s/^\(OnlyShowIn=.*\);Awesome\(.*\)$/\1\2/g" /etc/xdg/autostart/*.desktop
 }
 
 post_upgrade() {
 	systemctl enable slim
 
 	echo "%wheel ALL=(ALL) ALL #KANA-P" >> /etc/sudoers
-
-	sed -i "s/^\(OnlyShowIn=.*\)$/\1Awesome;/g" /etc/xdg/autostart/*.desktop
 }
 
 pre_remove()

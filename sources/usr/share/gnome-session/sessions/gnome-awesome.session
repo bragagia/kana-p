@@ -1,0 +1,3 @@
+[GNOME Session]
+Name=Gnome with Awesome
+RequiredComponents=awesome;gnome-settings-daemon;

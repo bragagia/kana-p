@@ -12,7 +12,7 @@ depends=(
 	'zsh'
 	'xorg-server' 'xorg-server-utils'
 	'slim'
-	'gnome' 'awesome'
+	'awesome'
 	'git'
 )
 makedepends=()
