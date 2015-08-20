@@ -11,8 +11,13 @@ depends=(
 	'dhcpcd' 'networkmanager' 'net-tools' 'sudo'
 	'zsh'
 	'xorg-server' 'xorg-server-utils'
-	'slim'
-	'gnome' 'awesome'
+	'gdm'
+	'awesome'
+	'adwaita-icon-theme' 'dconf-editor' 'gnome-backgrounds' 
+'gnome-control-center' 'gnome-desktop' 'gnome-session' 
+'gnome-settings-daemon' 'gnome-shell' 'gnome-shell-extensions' 
+'gnome-user-docs' 'gucharmap' 'mousetweaks' 'mutter' 'tracker' 
+'xdg-user-dirs-gtk'
 	'git'
 )
 makedepends=()
@@ -30,6 +35,4 @@ md5sums=('SKIP')
 
 package() {
 	mv -T $srcdir/$pkgname-$pkgver/sources $pkgdir
-	cd $pkgdir
-	cp -r etc/kana-p/home/ etc/skel
 }
