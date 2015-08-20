@@ -1,7 +1,7 @@
 # Maintainer: Mathias Bragagia <youremail@domain.com>
 pkgname=kana-p-dev
-pkgver=1
-pkgrel=0.0.1
+pkgver=0.0.3
+pkgrel=6
 pkgdesc="Middlewar meta-package"
 arch=('any')
 url=""
@@ -22,14 +22,14 @@ conflicts=()
 replaces=()
 backup=()
 options=()
-install=.install
+install=INSTALL
 changelog=
-source=(git://github.com/bragagia/kana-p.git#dev)
+source=(https://github.com/bragagia/kana-p/archive/dev.tar.gz)
 noextract=()
 md5sums=('SKIP')
 
 package() {
-	cp -r trunk/sources $pkgdir
-	echo $pkgdir
-	rm -r trunk
+	mv -T $srcdir/$pkgname/sources $pkgdir
+	cd $pkgdir
+	cp -r etc/kana-p/home/ etc/skel
 }
