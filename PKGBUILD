@@ -1,6 +1,6 @@
 # Maintainer: Mathias Bragagia <youremail@domain.com>
 pkgname=kana-p-dev
-pkgver=0.0.3
+pkgver=0.0.4
 pkgrel=6
 pkgdesc="Middlewar meta-package"
 arch=('any')
@@ -24,7 +24,7 @@ backup=()
 options=()
 install=INSTALL
 changelog=
-source=(https://github.com/bragagia/kana-p/archive/dev-0.0.3.tar.gz)
+source=(https://github.com/bragagia/kana-p/archive/dev-$pkgver.tar.gz)
 noextract=()
 md5sums=('SKIP')
 
