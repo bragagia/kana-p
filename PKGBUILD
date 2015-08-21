@@ -1,25 +1,46 @@
 # Maintainer: Mathias Bragagia <youremail@domain.com>
 pkgname=kana-p-dev
-pkgver=0.0.4
-pkgrel=6
+pkgver=0.1
+pkgrel=1
 pkgdesc="Middlewar meta-package"
 arch=('any')
 url=""
 license=('GPL')
 groups=()
 depends=(
-	'dhcpcd' 'networkmanager' 'net-tools' 'sudo'
+	'networkmanager'
+	'net-tools'
+	'sudo'
+
 	'zsh'
-	'xorg-server' 'xorg-server-utils'
+
+	'xorg-server'
+	'xorg-server-utils'
+
 	'gdm'
+
 	'awesome'
-	'adwaita-icon-theme' 'dconf-editor' 'gnome-backgrounds' 
-'gnome-control-center' 'gnome-desktop' 'gnome-session' 
-'gnome-settings-daemon' 'gnome-shell' 'gnome-shell-extensions' 
-'gnome-user-docs' 'gucharmap' 'mousetweaks' 'mutter' 'tracker' 
-'xdg-user-dirs-gtk'
+
+	'adwaita-icon-theme'
+	'dconf-editor'
+	'gnome-backgrounds'
+	'gnome-control-center'
+	'gnome-desktop'
+	'gnome-session'
+	'gnome-keyring'
+	'gnome-settings-daemon'
+	'gnome-user-docs'
+	'mousetweaks' 
+	'tracker'
+	'xdg-user-dirs-gtk'
+
+	'gnome-initial-setup'
+
 	'git'
+
+	'network-manager-applet'
 )
+#	'gnome-getting-started-docs'
 makedepends=()
 optdepends=()
 provides=()

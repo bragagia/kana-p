@@ -3,4 +3,4 @@ cp PKGBUILD INSTALL tmp
 cd tmp
 makepkg -sri
 cd ..
-#rm -rf tmp
+rm -rf tmp

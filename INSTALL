@@ -1,28 +1,29 @@
 post_install() {
 	post_upgrade
 
-	systemctl start slim
+	systemctl start gdm.service
+	systemctl start NetworkManager.service
 }
 
 pre_upgrade() {
-	systemctl disable slim
+	systemctl disable gdm.service
+	systemctl disable NetworkManager.service
 
 	grep -v "#KANA-P" /etc/sudoers > /tmp/kana-p ; mv /tmp/kana-p /etc/sudoers
 
-	sed -i "s/^\(OnlyShowIn=.*\);Awesome\(.*\)$/\1\2/g" /etc/xdg/autostart/*.desktop
+	sed -i "s/^\(OnlyShowIn=.*\)Awesome;\(.*\)$/\1\2/g" /etc/xdg/autostart/*.desktop /usr/share/applications/gnome-*.desktop
 }
 
 post_upgrade() {
-	systemctl enable slim
+	systemctl enable gdm.service
+	systemctl enable NetworkManager.service
 
 	echo "%wheel ALL=(ALL) ALL #KANA-P" >> /etc/sudoers
 
-	sed -i "s/^\(OnlyShowIn=.*\)$/\1Awesome;/g" /etc/xdg/autostart/*.desktop
+	sed -i "s/^\(OnlyShowIn=.*\)$/\1Awesome;/g" /etc/xdg/autostart/*.desktop /usr/share/applications/gnome-*.desktop
 }
 
 pre_remove()
 {
 	pre_upgrade
-
-	systemctl stop slim
 }

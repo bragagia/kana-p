@@ -5,3 +5,4 @@ Name=Awesome
 Comment=Awesome Windows Manager
 TryExec=awesome
 Exec=awesome
+NoDisplay=true
