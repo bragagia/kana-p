@@ -8,10 +8,12 @@ url=""
 license=('GPL')
 groups=()
 depends=(
-	'dhcpcd' 
+	'dhcpcd' 'networkmanager' 'net-tools' 'sudo'
+	'zsh'
 	'xorg-server' 'xorg-server-utils'
 	'slim'
 	'awesome'
+	'git'
 )
 makedepends=()
 optdepends=()

@@ -1,10 +1,14 @@
 post_install() {
+	echo "%wheel ALL=(ALL) ALL #KANA-P" >> /etc/sudoers
+
 	systemctl enable slim
-	systemctl start slim
+	systemctl start slim	
 }
 
 pre_remove()
 {
 	systemctl disable slim
 	systemctl stop slim
+
+	grep -v "#KANA-P" /etc/sudoers > /tmp/kana-p ; mv /tmp/kana-p /etc/sudoers
 }
