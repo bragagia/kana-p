@@ -29,7 +29,7 @@ noextract=()
 md5sums=('SKIP')
 
 package() {
-	mv -T $srcdir/$pkgname/sources $pkgdir
+	mv -T $srcdir/$pkgname-$pkgver/sources $pkgdir
 	cd $pkgdir
 	cp -r etc/kana-p/home/ etc/skel
 }
