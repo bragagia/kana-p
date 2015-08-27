@@ -24,7 +24,7 @@ backup=()
 options=()
 install=INSTALL
 changelog=
-source=(https://github.com/bragagia/kana-p/archive/dev.tar.gz)
+source=(https://github.com/bragagia/kana-p/archive/dev-0.0.3.tar.gz)
 noextract=()
 md5sums=('SKIP')
 
