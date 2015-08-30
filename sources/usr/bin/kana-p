@@ -1,2 +1,3 @@
+#! /bin/sh
 dex -a
-awesome -c /usr/share/kana-p/awesome/main.lua
+exec awesome -c /usr/share/kana-p/awesome/main.lua

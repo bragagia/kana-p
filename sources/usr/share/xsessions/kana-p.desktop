@@ -1,6 +1,8 @@
 [Desktop Entry]
+Encoding=UTF-8
 Name=Kana-P
+Comment=Highly configurable Desktop Manager
 Exec=kana-p
-TryExec=awesome
+TryExec=kana-p
 Type=Application
 
