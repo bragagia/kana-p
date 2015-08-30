@@ -1,14 +1,21 @@
 # Maintainer: Mathias Bragagia <youremail@domain.com>
 pkgname=kana-p-dev
 pkgver=0.1
-pkgrel=1
+pkgrel=2
 pkgdesc="Middlewar meta-package"
 arch=('any')
 url=""
 license=('GPL')
 groups=()
 depends=(
+	'xf86-input-synaptics'
+
 	'networkmanager'
+	'pulseaudio'
+	'pulseaudio-alsa'
+	'bluez'
+	'bluez-utils'
+
 	'net-tools'
 	'sudo'
 
@@ -17,30 +24,17 @@ depends=(
 	'xorg-server'
 	'xorg-server-utils'
 
-	'gdm'
+	'lightdm'
+	'lightdm-gtk-greeter'
 
 	'awesome'
 
-	'adwaita-icon-theme'
-	'dconf-editor'
-	'gnome-backgrounds'
-	'gnome-control-center'
-	'gnome-desktop'
-	'gnome-session'
-	'gnome-keyring'
-	'gnome-settings-daemon'
-	'gnome-user-docs'
-	'mousetweaks' 
-	'tracker'
+	'xdg-utils'
 	'xdg-user-dirs-gtk'
-
-	'gnome-initial-setup'
+	'dex'
 
 	'git'
-
-	'network-manager-applet'
 )
-#	'gnome-getting-started-docs'
 makedepends=()
 optdepends=()
 provides=()

@@ -1,6 +1,0 @@
-[Desktop Entry]
-Name=Gnome/Awesome
-Exec=gnome-session --session=gnome-awesome
-TryExec=awesome
-Type=Application
-

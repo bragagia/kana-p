@@ -1,7 +1,7 @@
 post_install() {
 	post_upgrade
 
-	systemctl start gdm.service
+	systemctl start lightdm.service
 	systemctl start NetworkManager.service
 }
 
@@ -9,18 +9,20 @@ pre_upgrade() {
 	systemctl disable gdm.service
 	systemctl disable NetworkManager.service
 
+	echo PENI-BEFORE
 	grep -v "#KANA-P" /etc/sudoers > /tmp/kana-p ; mv /tmp/kana-p /etc/sudoers
 
-	sed -i "s/^\(OnlyShowIn=.*\)Awesome;\(.*\)$/\1\2/g" /etc/xdg/autostart/*.desktop /usr/share/applications/gnome-*.desktop
+	sed -i "s/^\(OnlyShowIn=.*\)Awesome;\(.*\)$/\1\2/g" /etc/xdg/autostart/*.desktop
 }
 
 post_upgrade() {
-	systemctl enable gdm.service
+	systemctl enable lightdm.service
 	systemctl enable NetworkManager.service
 
+	echo PENI-AFTER
 	echo "%wheel ALL=(ALL) ALL #KANA-P" >> /etc/sudoers
 
-	sed -i "s/^\(OnlyShowIn=.*\)$/\1Awesome;/g" /etc/xdg/autostart/*.desktop /usr/share/applications/gnome-*.desktop
+	sed -i "s/^\(OnlyShowIn=.*\)$/\1Awesome;/g" /etc/xdg/autostart/*.desktop
 }
 
 pre_remove()

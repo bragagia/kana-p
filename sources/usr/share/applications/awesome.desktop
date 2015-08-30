@@ -1,8 +1,0 @@
-[Desktop Entry]
-Version=1.0
-Type=Application
-Name=Awesome
-Comment=Awesome Windows Manager
-TryExec=awesome
-Exec=awesome
-NoDisplay=true
