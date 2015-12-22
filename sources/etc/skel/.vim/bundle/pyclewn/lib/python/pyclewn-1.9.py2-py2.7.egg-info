@@ -1,0 +1,20 @@
+Metadata-Version: 1.1
+Name: pyclewn
+Version: 1.9.py2
+Summary: Pyclewn allows using Vim as a front end to a debugger.
+Home-page: http://pyclewn.sourceforge.net/
+Author: Xavier de Gaye
+Author-email: xdegaye at users dot sourceforge dot net
+License: GNU GENERAL PUBLIC LICENSE Version 2
+Description: Pyclewn allows using Vim as a front end to a debugger.
+        The debugger output is redirected to a Vim window, the pyclewn console.
+        The debugger commands are mapped to Vim user-defined commands
+        with a common letter prefix, and with completion available on the
+        commands and their first argument. The controlling terminal of the
+        program to debug is the terminal used to launch pyclewn, or any other
+        terminal when the debugger allows it.
+        
+Platform: all
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 2
+Requires: subprocess

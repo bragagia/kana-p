@@ -1,5 +1,7 @@
 #!/usr/bin/env zsh
 
+[[ -z $DISPLAY && $XDG_VTNR -le 3 ]] && (exec startx; exit 0)
+
 autoload -U compinit && compinit
 autoload -U colors && colors
 setopt HIST_IGNORE_DUPS
@@ -7,6 +9,7 @@ setopt completealiases
 
 ### Prompt
 
+source ~/.config/zsh/git-prompt.sh
 setopt PROMPT_SUBST
 
 function prompt_pwd
@@ -24,8 +27,11 @@ function my_prompt()
     # Path
     pt="$pt%{$fg_bold[red]%}$(prompt_pwd)"
 
+    # Git
+    pt="$pt%{$fg_bold[white]%}$(git_branch)"
+
     # Suffix
-    pt="$pt%{$fg_bold[white]%} "
+    pt="$pt%{$fg_no_bold[white]%} "
 
     echo $pt
 }

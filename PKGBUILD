@@ -1,7 +1,7 @@
 # Maintainer: Mathias Bragagia <youremail@domain.com>
 pkgname=kana-p-dev
 pkgver=0.1
-pkgrel=2
+pkgrel=1
 pkgdesc="Middlewar meta-package"
 arch=('any')
 url=""
@@ -27,11 +27,17 @@ depends=(
 	'lightdm'
 	'lightdm-gtk-greeter'
 
+	'compton'
 	'awesome'
+	'lain-git'
+	'eminent-git'
+	'ohsnap'
+	'otf-sauce-code-powerline-git'
 
 	'xdg-utils'
 	'xdg-user-dirs-gtk'
 	'dex'
+	'feh'
 
 	'git'
 )
@@ -51,3 +57,4 @@ md5sums=('SKIP')
 package() {
 	mv -T $srcdir/$pkgname-$pkgver/sources $pkgdir
 }
+#	cp -rT /home/kanak/Documents/kana-p/sources/ $pkgdir

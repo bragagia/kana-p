@@ -1,31 +1,24 @@
 post_install() {
-	post_upgrade
+	systemctl enable lightdm.service > /dev/null
+	systemctl enable NetworkManager.service > /dev/null
 
-	systemctl start lightdm.service
-	systemctl start NetworkManager.service
+	sed -i "s/^\(OnlyShowIn=.*\)$/\1Awesome;/g" /etc/xdg/autostart/*.desktop
+	echo "background=/usr/share/kana-p/login-wallpaper.jpg" >> /etc/lightdm/lightdm-gtk-greeter.conf
 }
 
 pre_upgrade() {
-	systemctl disable gdm.service
-	systemctl disable NetworkManager.service
-
-	echo PENI-BEFORE
-	grep -v "#KANA-P" /etc/sudoers > /tmp/kana-p ; mv /tmp/kana-p /etc/sudoers
-
-	sed -i "s/^\(OnlyShowIn=.*\)Awesome;\(.*\)$/\1\2/g" /etc/xdg/autostart/*.desktop
+	pre_remove
 }
 
 post_upgrade() {
-	systemctl enable lightdm.service
-	systemctl enable NetworkManager.service
-
-	echo PENI-AFTER
-	echo "%wheel ALL=(ALL) ALL #KANA-P" >> /etc/sudoers
-
-	sed -i "s/^\(OnlyShowIn=.*\)$/\1Awesome;/g" /etc/xdg/autostart/*.desktop
+	post_install
 }
 
 pre_remove()
 {
-	pre_upgrade
+	systemctl disable gdm.service > /dev/null
+	systemctl disable NetworkManager.service > /dev/null
+
+	sed -i "s/^\(OnlyShowIn=.*\)Awesome;\(.*\)$/\1\2/g" /etc/xdg/autostart/*.desktop
+	sed -i 's#^background=/usr/share/kana-p/login-wallpaper.jpg$##g' /etc/lightdm/lightdm-gtk-greeter.conf
 }

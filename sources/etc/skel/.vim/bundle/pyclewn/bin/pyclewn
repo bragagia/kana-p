@@ -1,0 +1,11 @@
+#!/usr/bin/python
+
+import sys
+import os
+cwd = os.path.join(os.path.dirname(os.path.relpath(__file__)))
+libPath = os.path.join(cwd, "../lib/python")
+sys.path.append(libPath)
+
+
+import clewn.vim as vim
+vim.main()

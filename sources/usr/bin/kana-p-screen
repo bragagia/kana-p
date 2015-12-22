@@ -1,0 +1,79 @@
+#!/bin/sh
+
+SCREENS_FILE=`mktemp`
+SCREENS_ORDERED_FILE=`mktemp`
+CONFIG_FILE=$HOME"/.kana-p-autoscreen.rc"
+
+XRANDR="xrandr"
+
+declare -A VOUTS
+eval VOUTS=$(${XRANDR} | awk 'BEGIN {printf("(")} /^\S.*connected/{printf("[%s]=%s ", $1, $2)} END{printf(")")}')
+
+# Create config file
+if [ ! -f $CONFIG_FILE ]
+then
+    touch $CONFIG_FILE
+    for VOUT in ${!VOUTS[*]}
+    do
+        echo ${VOUT} >> $CONFIG_FILE
+    done
+fi
+
+# Create tmp file with list of active screens
+for VOUT in ${!VOUTS[*]}
+do
+    if [ ${VOUTS[${VOUT}]} == 'connected' ]
+    then
+        echo -n "-" >> $SCREENS_FILE
+    else
+        echo -n "." >> $SCREENS_FILE
+    fi
+    echo ${VOUT} >> $SCREENS_FILE
+done
+
+# Prepare the final list
+cp $SCREENS_FILE $SCREENS_ORDERED_FILE
+
+# Order final list as config file
+while read line
+do
+    if grep '^.'$line'$' $SCREENS_ORDERED_FILE > /dev/null
+    then
+        grep -v '^.'$line'$' $SCREENS_ORDERED_FILE >  $SCREENS_ORDERED_FILE'.tmp'
+        grep    '^.'$line'$' $SCREENS_ORDERED_FILE >> $SCREENS_ORDERED_FILE'.tmp'
+	mv $SCREENS_ORDERED_FILE'.tmp' $SCREENS_ORDERED_FILE
+    fi
+done < $CONFIG_FILE
+
+# Delete unordered screens list
+rm -f $SCREENS_FILE
+
+# Create final command
+CMD=$XRANDR
+while read line
+do
+    screen=`echo $line | sed "s/^.\(.*\)$/\1/g"`
+    # if screen is activated
+    if grep "^-" <<< "$line" > /dev/null
+    then
+        CMD="$CMD --output $screen --auto"
+        if [ ! $prec == '' ]
+        then
+            CMD="$CMD --right-of $prec"
+        fi
+        prec=$screen
+    else
+        CMD="$CMD --output $screen --off"
+    fi
+done < $SCREENS_ORDERED_FILE
+
+eval $CMD
+
+rm -f $SCREENS_ORDERED_FILE
+
+if [ -p $HOME/.fehbg ]
+then
+	feh --bg-fill '/usr/share/kana-p/wallpaper.jpg'
+else
+	$HOME/.fehbg
+fi
