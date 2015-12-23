@@ -619,7 +619,7 @@ client.connect_signal("manage", function (c, startup)
 
 		-- The title goes in the middle
 		local middle_layout = wibox.layout.flex.horizontal()
-		local spacer = awful.widget.textbox(" ")
+		local spacer = wibox.widget.textbox(" ")
 		local title = awful.titlebar.widget.titlewidget(c)
 		title:set_align("center")
 
