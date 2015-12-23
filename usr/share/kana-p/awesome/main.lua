@@ -411,8 +411,8 @@ awful.key({ modkey,           }, "o", function () awful.util.spawn("mpc next") e
 awful.key({ modkey,           }, "p", function () awful.util.spawn("mpc toggle") end),
 
 -- Special keys
-awful.key({                   }, "XF86MonBrightnessUp", function () awful.util.spawn("xbacklight +5") end),
-awful.key({                   }, "XF86MonBrightnessDown", function () awful.util.spawn("xbacklight -5") end),
+awful.key({                   }, "XF86MonBrightnessUp", function () awful.util.spawn("light -A 5") end),
+awful.key({                   }, "XF86MonBrightnessDown", function () awful.util.spawn("light -U 5") end),
 awful.key({                   }, "XF86AudioLowerVolume", function () awful.util.spawn("pulseaudio-ctl down 3") end),
 awful.key({                   }, "XF86AudioRaiseVolume", function () awful.util.spawn("pulseaudio-ctl up 3") end),
 awful.key({                   }, "XF86AudioMute", function () awful.util.spawn("pulseaudio-ctl mute") end),
@@ -619,8 +619,11 @@ client.connect_signal("manage", function (c, startup)
 
 		-- The title goes in the middle
 		local middle_layout = wibox.layout.flex.horizontal()
+		local spacer = awful.widget.textbox(" ")
 		local title = awful.titlebar.widget.titlewidget(c)
 		title:set_align("center")
+
+		left_layout:add(spacer)
 		left_layout:add(title)
 		middle_layout:buttons(buttons)
 
