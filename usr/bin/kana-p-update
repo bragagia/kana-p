@@ -1,1 +1,1 @@
-cp -r /etc/skel/.* ~
+cp -ri /etc/skel/.* ~
