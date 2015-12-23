@@ -71,7 +71,7 @@ eval $CMD
 
 rm -f $SCREENS_ORDERED_FILE
 
-if [ -p $HOME/.fehbg ]
+if [ ! -p $HOME/.fehbg ]
 then
 	feh --bg-fill '/usr/share/kana-p/wallpaper.jpg'
 else
