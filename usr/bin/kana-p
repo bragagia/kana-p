@@ -6,5 +6,7 @@ dex -a
 
 kana-p-screen
 
+devmon &
+
 compton -fcCbz -r 14 -o .85 -l -17 -t -17 -I 0.05 -O 0.05 -D 10 -i 0.73 --focus-exclude '!class_g *?= "URxvt"' --inactive-opacity-override --shadow-exclude-reg 'x20+0+0' &
 exec awesome -c /usr/share/kana-p/awesome/main.lua
