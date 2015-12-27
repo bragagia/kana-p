@@ -1,10 +1,11 @@
 local naughty		= require("naughty")
-local gears		= require("gears")
-local awful		= require("awful")
+local gears			= require("gears")
+local awful			= require("awful")
       awful.rules	= require("awful.rules")
-			  require("awful.autofocus")
-local wibox		= require("wibox")
+			  		  require("awful.autofocus")
+local wibox			= require("wibox")
 local beautiful		= require("beautiful")
+local lain			= require("lain")
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -30,9 +31,6 @@ do
 end
 -- }}}
 
-local klayout		= require("klayout")
-local lain		= require("lain")
-
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
 beautiful.init("/usr/share/kana-p/awesome/theme.lua")
@@ -46,7 +44,7 @@ terminal = "urxvt"
 editor = os.getenv("EDITOR") or "vi"
 editor_cmd = terminal .. " -e " .. editor
 explorer_cmd = terminal .. " -e ranger"
-lock_cmd = "xset s activate"
+lock_cmd = "light-locker-command -l"
 
 -- Default modkey.
 -- Usually, Mod4 is the key with a logo between Control and Alt.
@@ -59,7 +57,6 @@ modkey = "Mod4"
 local layouts =
 {
 	awful.layout.suit.floating,
-	klayout.tile,
 	lain.layout.uselesstile,
 	lain.layout.centerfair
 }
@@ -76,20 +73,15 @@ lain.layout.termfair.ncol = 1
 tags = {}
 for s = 1, screen.count() do
 	-- Each screen has its own tag table.
-	tags[s] = awful.tag({ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10}, s, layouts[2])
-	tags[s][1].name = '  web '
-	tags[s][2].name = 'irc '
-	tags[s][3].name = 'skype '
-	tags[s][4].name = 'ns '
-	tags[s][5].name = 'dev I '
-	tags[s][6].name = 'dev II '
-	tags[s][7].name = 'dev III '
-	awful.layout.set(lain.layout.centerfair, tags[s][5])
-	awful.layout.set(lain.layout.centerfair, tags[s][6])
-	awful.layout.set(lain.layout.centerfair, tags[s][7])
-	tags[s][8].name = 'torrent '
-	tags[s][9].name = 'music '
-	tags[s][10].name = 'pom '
+	tags[s] = awful.tag({ 1, 2, 3, 4, 5, 6, 7, 8}, s, layouts[2])
+	tags[s][1].name = 'web'
+	tags[s][2].name = 'irc'
+	tags[s][3].name = 'skype'
+	tags[s][4].name = 'dev I'
+	tags[s][5].name = 'dev II'
+	tags[s][6].name = 'dev III'
+	tags[s][7].name = 'torrent'
+	tags[s][8].name = 'music'
 end
 -- }}}
 
@@ -255,7 +247,6 @@ spacer = wibox.widget.textbox(" ")
 -- Create a wibox for each screen and add it
 mywibox = {}
 mytaskbox = {}
-mypromptbox = {}
 mylayoutbox = {}
 mytaglist = {}
 mytaglist.buttons = awful.util.table.join(
@@ -263,8 +254,8 @@ mytaglist.buttons = awful.util.table.join(
 					awful.button({ modkey }, 1, awful.client.movetotag),
 					awful.button({ }, 3, awful.tag.viewtoggle),
 					awful.button({ modkey }, 3, awful.client.toggletag)
-					--awful.button({ }, 4, function(t) awful.tag.viewnext(awful.tag.getscreen(t)) end),
-					--awful.button({ }, 5, function(t) awful.tag.viewprev(awful.tag.getscreen(t)) end)
+					awful.button({ }, 4, function(t) awful.tag.viewnext(awful.tag.getscreen(t)) end),
+					awful.button({ }, 5, function(t) awful.tag.viewprev(awful.tag.getscreen(t)) end)
 					)
 mytasklist = {}
 mytasklist.buttons = awful.util.table.join(
@@ -293,27 +284,23 @@ mytasklist.buttons = awful.util.table.join(
 													  theme = { width = 250 }
 												  })
 											  end
+										  end)
+					 awful.button({ }, 4, function ()
+											  awful.client.focus.byidx(1)
+											  if client.focus then client.focus:raise() end
+										  end),
+					 awful.button({ }, 5, function ()
+											  awful.client.focus.byidx(-1)
+											  if client.focus then client.focus:raise() end
 										  end))
---					 awful.button({ }, 4, function ()
---											  awful.client.focus.byidx(1)
---											  if client.focus then client.focus:raise() end
---										  end),
---					 awful.button({ }, 5, function ()
---											  awful.client.focus.byidx(-1)
---											  if client.focus then client.focus:raise() end
---										  end))
 
 for s = 1, screen.count() do
-	-- Create a promptbox for each screen
-	mypromptbox[s] = awful.widget.prompt()
 	-- Create an imagebox widget which will contains an icon indicating which layout we're using.
 	-- We need one layoutbox per screen.
 	mylayoutbox[s] = awful.widget.layoutbox(s)
 	mylayoutbox[s]:buttons(awful.util.table.join(
 						   awful.button({ }, 1, function () awful.layout.inc(layouts, 1) end),
 						   awful.button({ }, 3, function () awful.layout.inc(layouts, -1) end)))
---						   awful.button({ }, 4, function () awful.layout.inc(layouts, 1) end),
---						   awful.button({ }, 5, function () awful.layout.inc(layouts, -1) end)))
 	-- Create a taglist widget
 	mytaglist[s] = awful.widget.taglist(s, awful.widget.taglist.filter.all, mytaglist.buttons)
 
@@ -322,8 +309,9 @@ for s = 1, screen.count() do
 
 	-- Widgets that are aligned to the left
 	local left_layout = wibox.layout.fixed.horizontal()
+	left_layout:add(widget_spacer)
+	left_layout:add(widget_spacer)
 	left_layout:add(mytaglist[s])
-	left_layout:add(mypromptbox[s])
 
 	-- Widgets that are aligned to the right
 	local right_layout = wibox.layout.fixed.horizontal()
@@ -379,11 +367,11 @@ end
 -- }}}
 
 -- {{{ Mouse bindings
-root.buttons(awful.util.table.join(
+--root.buttons(awful.util.table.join(
 --	awful.button({ }, 3, function () mymainmenu:toggle() end),
 --	awful.button({ }, 4, awful.tag.viewnext),
 --	awful.button({ }, 5, awful.tag.viewprev)
-))
+--))
 -- }}}
 
 -- {{{ Key bindings
@@ -402,8 +390,8 @@ awful.key({ modkey,           }, "u", awful.client.urgent.jumpto),
 -- Standard programs
 awful.key({ modkey,           }, "Return", function () awful.util.spawn(terminal) end),
 awful.key({ modkey,           }, "e", function () awful.util.spawn(explorer_cmd) end),
-awful.key({ modkey            }, "x", function () awful.util.spawn(lock_cmd) end),
-awful.key({ modkey            }, "w", function () awful.util.spawn("rofi -show run") end),
+awful.key({ modkey            }, "l", function () awful.util.spawn(lock_cmd) end),
+awful.key({ modkey            }, "r", function () awful.util.spawn("rofi -show run") end),
 
 -- Music
 awful.key({ modkey,           }, "i", function () awful.util.spawn("mpc prev") end),
@@ -416,7 +404,7 @@ awful.key({                   }, "XF86MonBrightnessDown", function () awful.util
 awful.key({                   }, "XF86AudioLowerVolume", function () awful.util.spawn("pulseaudio-ctl down 3") end),
 awful.key({                   }, "XF86AudioRaiseVolume", function () awful.util.spawn("pulseaudio-ctl up 3") end),
 awful.key({                   }, "XF86AudioMute", function () awful.util.spawn("pulseaudio-ctl mute") end),
-awful.key({                   }, "XF86Sleep", function () awful.util.spawn("systemctl suspend") end),
+awful.key({                   }, "xF86Sleep", function () awful.util.spawn("systemctl suspend") end),
 awful.key({                   }, "XF86Display", function () awful.util.spawn("kana-p-screen") end),
 awful.key({                   }, "Print", function () awful.util.spawn("scrot -e 'mv $f ~/Images/shots/'") end),
 
