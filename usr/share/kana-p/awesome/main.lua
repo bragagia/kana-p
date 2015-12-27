@@ -309,8 +309,8 @@ for s = 1, screen.count() do
 
 	-- Widgets that are aligned to the left
 	local left_layout = wibox.layout.fixed.horizontal()
-	left_layout:add(widget_spacer)
-	left_layout:add(widget_spacer)
+	left_layout:add(spacer)
+	left_layout:add(spacer)
 	left_layout:add(mytaglist[s])
 
 	-- Widgets that are aligned to the right
