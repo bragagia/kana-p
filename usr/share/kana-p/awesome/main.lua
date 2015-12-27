@@ -43,7 +43,7 @@ naughty.config.border_width     = beautiful.notif_border_width
 terminal = "urxvt"
 editor = os.getenv("EDITOR") or "vi"
 editor_cmd = terminal .. " -e " .. editor
-explorer_cmd = terminal .. " -e ranger"
+explorer_cmd = "xdg-open " .. os.getenv("HOME")
 lock_cmd = "light-locker-command -l"
 
 -- Default modkey.
