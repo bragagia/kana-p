@@ -1,10 +1,10 @@
-#! /bin/sh
+#!/bin/sh
 
 xset b off
 
-QT_STYLE_OVERRIDE=GTK+
-GTK2_RC_FILES=/usr/share/themes/Arc-Dark/gtk-2.0/gtkrc
-GTK-THEME=Arc-Dark
+export QT_STYLE_OVERRIDE=GTK+
+export GTK2_RC_FILES=/usr/share/themes/Arc-Dark/gtk-2.0/gtkrc
+export GTK_THEME=Arc-Dark
 
 dex -a
 
