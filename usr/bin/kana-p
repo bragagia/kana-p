@@ -1,6 +1,7 @@
 #!/bin/sh
 
 xset b off
+xset s off
 
 export QT_STYLE_OVERRIDE=GTK+
 export GTK2_RC_FILES=/usr/share/themes/Arc-Dark/gtk-2.0/gtkrc
