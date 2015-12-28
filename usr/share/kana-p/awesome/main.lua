@@ -112,7 +112,7 @@ battimer:start()
 
 -- end here for battery warning
 
-markup	  = lain.util.markup
+local markup	  = lain.util.markup
 
 -- Spacer
 widget_spacer = wibox.widget.textbox("?%")
@@ -246,7 +246,6 @@ spacer = wibox.widget.textbox(" ")
 
 -- Create a wibox for each screen and add it
 mywibox = {}
-mytaskbox = {}
 mylayoutbox = {}
 mytaglist = {}
 mytaglist.buttons = awful.util.table.join(
@@ -257,6 +256,9 @@ mytaglist.buttons = awful.util.table.join(
 					awful.button({ }, 4, function(t) awful.tag.viewnext(awful.tag.getscreen(t)) end),
 					awful.button({ }, 5, function(t) awful.tag.viewprev(awful.tag.getscreen(t)) end)
 					)
+mysystray = {}
+globalsystray = wibox.widget.systray()
+--globalsystray:set_bg("#00000000")
 mytasklist = {}
 mytasklist.buttons = awful.util.table.join(
 					 awful.button({ }, 1, function (c)
@@ -307,6 +309,43 @@ for s = 1, screen.count() do
 	-- Create the wibox
 	mywibox[s] = awful.wibox({ position = "top", screen = s, height = 20 })
 
+	mysystray[s] = {}
+	mysystray[s].stupid_bug = drawin({})
+	mysystray[s].container = wibox.layout.constraint()
+	mysystray[s].widget = wibox.widget.textbox("")
+
+	mysystray[s].show = function ()
+		for d = 1, screen.count() do
+			if d ~= s then
+				mysystray[d].hide()
+			end
+		end
+		mysystray[s].container:set_strategy("min")
+		mysystray[s].container:set_widget(globalsystray)
+		mysystray[s].visible = true
+		mysystray[s].widget:set_markup(markup(beautiful.info_spacer, " > "))
+	end
+
+	mysystray[s].hide = function ()
+		awesome.systray(mysystray[s].stupid_bug, 0, 0, 10, true, "#000000")
+		mysystray[s].container:set_widget(nil)
+		mysystray[s].container:set_strategy("exact")
+		mysystray[s].visible = false
+		mysystray[s].widget:set_markup(markup(beautiful.info_spacer, " &lt; "))
+	end
+
+	mysystray[s].hide()
+
+	mysystray[s].widget:buttons(awful.util.table.join(
+	awful.button({ }, 1, function ()
+		if mysystray[s].visible == true then
+			mysystray[s].hide()
+		else
+			mysystray[s].show()
+		end
+	end)
+	))
+
 	-- Widgets that are aligned to the left
 	local left_layout = wibox.layout.fixed.horizontal()
 	left_layout:add(spacer)
@@ -315,6 +354,9 @@ for s = 1, screen.count() do
 
 	-- Widgets that are aligned to the right
 	local right_layout = wibox.layout.fixed.horizontal()
+	right_layout:add(mysystray[s].container)
+	right_layout:add(mysystray[s].widget)
+
 	right_layout:add(mpdwidget)
 	right_layout:add(widget_spacer)
 
@@ -351,18 +393,22 @@ for s = 1, screen.count() do
 
 	mywibox[s]:set_widget(layout)
 
+	--mysystray[s].container.set_strategy("min")
+	--mysystray[s].container.set_width(4)
 	-- TaskBox
-	mytaskbox[s] = awful.wibox({ position = "bottom", screen = s})
-	mytaskbox[s].visible = false
+	--mytaskbox[s] = awful.wibox({ position = "bottom", screen = s})
+	--mytaskbox[s].visible = false
 
 	mytasklist[s] = awful.widget.tasklist(s, awful.widget.tasklist.filter.currenttags, mytasklist.buttons)
 
-	local layout2 = wibox.layout.align.horizontal()
-	if s == 1 then layout2:set_left(wibox.widget.systray()) end
-	layout2:set_middle(mytasklist[s])
-	layout2:set_right(mylayoutbox[s])
+	--local layout2 = wibox.layout.align.horizontal()
+	--if s == 1 then
+	--	layout2:set_left(wibox.widget.systray())
+	--end
+	--layout2:set_middle(mytasklist[s])
+	--layout2:set_right(mylayoutbox[s])
 
-	mytaskbox[s]:set_widget(layout2)
+	--mytaskbox[s]:set_widget(layout2)
 end
 -- }}}
 
@@ -380,7 +426,7 @@ globalkeys = awful.util.table.join(
 -- Awesome manipulation
 awful.key({ modkey, "Shift"   }, "r", awesome.restart),
 awful.key({ modkey, "Shift"   }, "q", awesome.quit),
-awful.key({ modkey, "Shift"   }, "w", function () mytaskbox[mouse.screen].visible = not mytaskbox[mouse.screen].visible end),
+--awful.key({ modkey, "Shift"   }, "w", function () mytaskbox[mouse.screen].visible = not mytaskbox[mouse.screen].visible end),
 
 -- Tag manipulation
 awful.key({ modkey,			  }, "Left", awful.tag.viewprev),
