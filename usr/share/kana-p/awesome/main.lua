@@ -50,13 +50,14 @@ local layouts =
 	lain.layout.uselesstile,
 	lain.layout.centerfair
 }
--- }}}
 
 lain.layout.centerfair.nmaster = 3
 lain.layout.centerfair.ncol = 1
 
 lain.layout.termfair.nmaster = 3
 lain.layout.termfair.ncol = 1
+-- }}}
+
 
 -- {{{ Tags
 -- Define a tag table which hold all screen tags.
@@ -99,7 +100,6 @@ end
 battimer = timer({timeout = 60})
 battimer:connect_signal("timeout", bat_notification)
 battimer:start()
-
 -- end here for battery warning
 
 local markup	  = lain.util.markup
@@ -123,29 +123,28 @@ function wifiInfo()
         wifi_signal_widget:set_markup(title .. markup(beautiful.info_value, wifiStrength))
     end
 end
-wifiInfo()
 
-wifi_timer = timer({timeout=2})
-wifi_timer:connect_signal("timeout",wifiInfo)
+wifiInfo()
+wifi_timer = timer({timeout = 1})
+wifi_timer:connect_signal("timeout", wifiInfo)
 wifi_timer:start()
 
 -- Volume
 volumewidget = lain.widgets.alsa({
     settings = function()
-        --if volume_now.status == "off" then
-        --    volume_now.level = volume_now.level .. "M"
-        --end
-
-        widget:set_markup(markup(beautiful.info_volume, "v ") .. markup(beautiful.info_value, volume_now.level))
+		if volume_now.status == "off" then
+			widget:set_markup(markup(beautiful.info_volume, "v ") .. markup(beautiful.info_value, "M"))
+		else
+			widget:set_markup(markup(beautiful.info_volume, "v ") .. markup(beautiful.info_value, volume_now.level))
+		end
     end
 })
 
-vol_timer = timer({timeout=2})
+vol_timer = timer({timeout = 1})
 vol_timer:connect_signal("timeout", volumewidget.update)
 vol_timer:start()
 
 -- CPU
-cpuicon = wibox.widget.imagebox()
 cpuwidget = lain.widgets.cpu({
 	settings = function()
 		widget:set_markup(markup(beautiful.info_cpu, "c ") .. markup(beautiful.info_value, cpu_now.usage))
@@ -435,13 +434,22 @@ awful.key({ modkey,           }, "o", function () awful.util.spawn("mpc next") e
 awful.key({ modkey,           }, "p", function () awful.util.spawn("mpc toggle") end),
 
 -- Special keys
-awful.key({                   }, "XF86MonBrightnessUp", function () awful.util.spawn("light -A 5") end),
-awful.key({                   }, "XF86MonBrightnessDown", function () awful.util.spawn("light -U 5") end),
-awful.key({                   }, "XF86AudioLowerVolume", function () awful.util.spawn("pulseaudio-ctl down 3") end),
-awful.key({                   }, "XF86AudioRaiseVolume", function () awful.util.spawn("pulseaudio-ctl up 3") end),
-awful.key({                   }, "XF86AudioMute", function () awful.util.spawn("pulseaudio-ctl mute") end),
-awful.key({                   }, "xF86Sleep", function () awful.util.spawn("systemctl suspend") end),
-awful.key({                   }, "XF86Display", function () awful.util.spawn("kana-p-screen") end),
+awful.key({                   }, "XF86MonBrightnessUp", function () os.execute("light -A 5") end),
+awful.key({                   }, "XF86MonBrightnessDown", function () os.execute("light -U 5") end),
+awful.key({                   }, "XF86AudioLowerVolume", function ()
+	os.execute("pulseaudio-ctl down 3")
+	volumewidget.update()
+end),
+awful.key({                   }, "XF86AudioRaiseVolume", function ()
+	os.execute("pulseaudio-ctl up 3")
+	volumewidget.update()
+end),
+awful.key({                   }, "XF86AudioMute", function ()
+	os.execute("pulseaudio-ctl mute")
+	volumewidget.update()
+end),
+awful.key({                   }, "XF86Sleep", function () os.execute("systemctl suspend") end),
+awful.key({                   }, "XF86Display", function () os.execute("kana-p-screen") end),
 awful.key({                   }, "Print", function () awful.util.spawn("scrot -e 'mv $f ~/Images/shots/'") end),
 
 -- Layout
