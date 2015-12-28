@@ -13,7 +13,7 @@ export XDG_DATA_HOME="$HOME""/.local/share"
 export XDG_DATA_DIRS="/usr/local/share:/usr/share"
 export XDG_CONFIG_DIRS="/etc/xdg"
 
-dex -a
+dex -a -e Awesome
 
 kana-p-screen
 
