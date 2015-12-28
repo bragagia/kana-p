@@ -34,6 +34,8 @@ theme.bg_focus  = "#10101000"
 theme.bg_urgent = "#10101000"
 -- }}}
 
+theme.bg_systray = "#505050"
+
 theme.notif_fg = "#000000"
 theme.notif_bg = "#91EBE9"
 theme.notif_border_width = 0
