@@ -31,10 +31,8 @@ naughty.config.bg               = beautiful.notif_bg
 naughty.config.border_width     = beautiful.notif_border_width
 naughty.config.position         = "bottom_right"
 
--- This is used later as the default terminal and editor to run.
+-- This is used later as the default terminal.
 terminal = "urxvt"
-editor = os.getenv("EDITOR") or "vi"
-editor_cmd = terminal .. " -e " .. editor
 explorer_cmd = "xdg-open " .. os.getenv("HOME")
 lock_cmd = "light-locker-command -l"
 
