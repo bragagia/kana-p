@@ -29,6 +29,7 @@ beautiful.init("/usr/share/kana-p/awesome/theme.lua")
 naughty.config.fg               = beautiful.notif_fg
 naughty.config.bg               = beautiful.notif_bg
 naughty.config.border_width     = beautiful.notif_border_width
+naughty.config.position         = "bottom_right"
 
 -- This is used later as the default terminal and editor to run.
 terminal = "urxvt"
