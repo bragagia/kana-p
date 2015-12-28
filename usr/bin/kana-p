@@ -7,6 +7,12 @@ export QT_STYLE_OVERRIDE=GTK+
 export GTK2_RC_FILES=/usr/share/themes/Arc-Dark/gtk-2.0/gtkrc
 export GTK_THEME=Arc-Dark
 
+export XDG_CONFIG_HOME="$HOME""/.config"
+export XDG_CACHE_HOME="$HOME""/.cache"
+export XDG_DATA_HOME="$HOME""/.local/share"
+export XDG_DATA_DIRS="/usr/local/share:/usr/share"
+export XDG_CONFIG_DIRS="/etc/xdg"
+
 dex -a
 
 kana-p-screen
