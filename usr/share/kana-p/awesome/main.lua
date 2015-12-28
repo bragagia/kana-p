@@ -15,8 +15,8 @@ do
 		if in_error then return end
 		in_error = true
 		naughty.notify({ preset = naughty.config.presets.critical,
-						 title = "Oops, an error happened!",
-						 text = err })
+		title = "Oops, an error happened!",
+		text = err })
 		in_error = false
 	end)
 end
@@ -78,23 +78,23 @@ end
 
 -- battery warning
 local function trim(s)
-  return s:find'^%s*$' and '' or s:match'^%s*(.*%S)'
+	return s:find'^%s*$' and '' or s:match'^%s*(.*%S)'
 end
 
 local function bat_notification()
-  local f_capacity = assert(io.open("/sys/class/power_supply/BAT0/capacity", "r"))
-  local f_status = assert(io.open("/sys/class/power_supply/BAT0/status", "r"))
-  local bat_capacity = tonumber(f_capacity:read("*all"))
-  local bat_status = trim(f_status:read("*all"))
+	local f_capacity = assert(io.open("/sys/class/power_supply/BAT0/capacity", "r"))
+	local f_status = assert(io.open("/sys/class/power_supply/BAT0/status", "r"))
+	local bat_capacity = tonumber(f_capacity:read("*all"))
+	local bat_status = trim(f_status:read("*all"))
 
-  if (bat_capacity <= 15 and bat_status == "Discharging") then
-    naughty.notify({ title      = "Battery Warning"
-      , text       = "Battery low ! " .. bat_capacity .."%" .. " left !"
-      , fg="#ffffff"
-      , bg="#C91C1C"
-      , timeout    = 15
-    })
-  end
+	if (bat_capacity <= 15 and bat_status == "Discharging") then
+		naughty.notify({ title      = "Battery Warning"
+		, text       = "Battery low ! " .. bat_capacity .."%" .. " left !"
+		, fg="#ffffff"
+		, bg="#C91C1C"
+		, timeout    = 15
+	})
+end
 end
 
 battimer = timer({timeout = 60})
@@ -115,13 +115,13 @@ mytextclock = awful.widget.textclock(markup(beautiful.info_value, "%d %B ") .. m
 --- Wifi
 wifi_signal_widget = wibox.widget.textbox("?%")
 function wifiInfo()
-    local wifiStrength = awful.util.pread("awk 'NR==3 {printf \"%.0f\\n\",($3/70)*100}' /proc/net/wireless")
+	local wifiStrength = awful.util.pread("awk 'NR==3 {printf \"%.0f\\n\",($3/70)*100}' /proc/net/wireless")
 	local title = markup(beautiful.info_wifi, "w ")
-    if wifiStrength == "" then
-        wifi_signal_widget:set_markup(title .. markup(beautiful.info_value, "x"))
-    else
-        wifi_signal_widget:set_markup(title .. markup(beautiful.info_value, wifiStrength))
-    end
+	if wifiStrength == "" then
+		wifi_signal_widget:set_markup(title .. markup(beautiful.info_value, "x"))
+	else
+		wifi_signal_widget:set_markup(title .. markup(beautiful.info_value, wifiStrength))
+	end
 end
 
 wifiInfo()
@@ -131,13 +131,13 @@ wifi_timer:start()
 
 -- Volume
 volumewidget = lain.widgets.alsa({
-    settings = function()
+	settings = function()
 		if volume_now.status == "off" then
 			widget:set_markup(markup(beautiful.info_volume, "v ") .. markup(beautiful.info_value, "M"))
 		else
 			widget:set_markup(markup(beautiful.info_volume, "v ") .. markup(beautiful.info_value, volume_now.level))
 		end
-    end
+	end
 })
 
 vol_timer = timer({timeout = 1})
@@ -159,11 +159,9 @@ tempwidget = lain.widgets.temp({
 	end
 })
 
--- NET
-netdownicon = wibox.widget.imagebox(beautiful.widget_netdown)
+-- Net usage
 netdowninfo = wibox.widget.textbox()
 
-netupicon = wibox.widget.imagebox(beautiful.widget_netup)
 netupinfo = lain.widgets.net({
 	settings = function()
 		widget:set_markup(markup(beautiful.info_upload, "u ") .. markup(beautiful.info_value, net_now.sent))
@@ -171,7 +169,7 @@ netupinfo = lain.widgets.net({
 	end
 })
 
-baticon = wibox.widget.imagebox(beautiful.widget_batt)
+-- Battery
 batwidget = lain.widgets.bat({
 	settings = function()
 		if bat_now.perc == "N/A" then
@@ -184,7 +182,6 @@ batwidget = lain.widgets.bat({
 })
 
 -- MEM
-memicon = wibox.widget.imagebox(beautiful.widget_mem)
 memwidget = lain.widgets.mem({
 	settings = function()
 		widget:set_markup(markup(beautiful.info_mem, "r ") .. markup(beautiful.info_value, mem_now.used))
@@ -192,7 +189,6 @@ memwidget = lain.widgets.mem({
 })
 
 -- MPD
-mpdicon = wibox.widget.imagebox()
 mpdwidget = lain.widgets.mpd({
 	settings = function()
 		mpd_notification_preset = {
@@ -205,7 +201,6 @@ mpdwidget = lain.widgets.mpd({
 			artist = mpd_now.artist
 			middle = " > "
 			title  = mpd_now.title
-			mpdicon:set_image(beautiful.widget_note_on)
 		elseif mpd_now.state == "pause" then
 			name = markup(beautiful.info_music, "m ")
 			artist = mpd_now.artist
@@ -216,19 +211,10 @@ mpdwidget = lain.widgets.mpd({
 			artist = "x"
 			middle = ""
 			title  = ""
-			mpdicon:set_image(nil)
 		end
 		widget:set_markup(markup(beautiful.info_music, name) .. markup(beautiful.info_value, artist) .. markup(beautiful.info_spacer, middle) .. markup(beautiful.info_spacer, title))
 	end
 })
-
--- Weather
---weathericon = wibox.widget.imagebox(beautiful.widget_weather)
---yawn = lain.widgets.yawn(627791, {
---	settings = function()
---		widget:set_markup(markup(beautiful.info_temp, "t ") .. markup(beautiful.info_value, units))
---	end 
---})
 
 -- SPACER
 spacer = wibox.widget.textbox(" ")
@@ -238,60 +224,60 @@ mywibox = {}
 mylayoutbox = {}
 mytaglist = {}
 mytaglist.buttons = awful.util.table.join(
-					awful.button({ }, 1, awful.tag.viewonly),
-					awful.button({ modkey }, 1, awful.client.movetotag),
-					awful.button({ }, 3, awful.tag.viewtoggle),
-					awful.button({ modkey }, 3, awful.client.toggletag),
-					awful.button({ }, 4, function(t) awful.tag.viewnext(awful.tag.getscreen(t)) end),
-					awful.button({ }, 5, function(t) awful.tag.viewprev(awful.tag.getscreen(t)) end)
-					)
+awful.button({ }, 1, awful.tag.viewonly),
+awful.button({ modkey }, 1, awful.client.movetotag),
+awful.button({ }, 3, awful.tag.viewtoggle),
+awful.button({ modkey }, 3, awful.client.toggletag),
+awful.button({ }, 4, function(t) awful.tag.viewnext(awful.tag.getscreen(t)) end),
+awful.button({ }, 5, function(t) awful.tag.viewprev(awful.tag.getscreen(t)) end)
+)
 mysystray = {}
 globalsystray = wibox.widget.systray()
 --globalsystray:set_bg("#00000000")
 mytasklist = {}
 mytasklist.buttons = awful.util.table.join(
-					 awful.button({ }, 1, function (c)
-											  if c == client.focus then
-												  c.minimized = true
-											  else
-												  -- Without this, the following
-												  -- :isvisible() makes no sense
-												  c.minimized = false
-												  if not c:isvisible() then
-													  awful.tag.viewonly(c:tags()[1])
-												  end
-												  -- This will also un-minimize
-												  -- the client, if needed
-												  client.focus = c
-												  c:raise()
-											  end
-										  end),
-					 awful.button({ }, 3, function ()
-											  if instance then
-												  instance:hide()
-												  instance = nil
-											  else
-												  instance = awful.menu.clients({
-													  theme = { width = 250 }
-												  })
-											  end
-										  end),
-					 awful.button({ }, 4, function ()
-											  awful.client.focus.byidx(1)
-											  if client.focus then client.focus:raise() end
-										  end),
-					 awful.button({ }, 5, function ()
-											  awful.client.focus.byidx(-1)
-											  if client.focus then client.focus:raise() end
-										  end))
+awful.button({ }, 1, function (c)
+	if c == client.focus then
+		c.minimized = true
+	else
+		-- Without this, the following
+		-- :isvisible() makes no sense
+		c.minimized = false
+		if not c:isvisible() then
+			awful.tag.viewonly(c:tags()[1])
+		end
+		-- This will also un-minimize
+		-- the client, if needed
+		client.focus = c
+		c:raise()
+	end
+end),
+awful.button({ }, 3, function ()
+	if instance then
+		instance:hide()
+		instance = nil
+	else
+		instance = awful.menu.clients({
+			theme = { width = 250 }
+		})
+	end
+end),
+awful.button({ }, 4, function ()
+	awful.client.focus.byidx(1)
+	if client.focus then client.focus:raise() end
+end),
+awful.button({ }, 5, function ()
+	awful.client.focus.byidx(-1)
+	if client.focus then client.focus:raise() end
+end))
 
 for s = 1, screen.count() do
 	-- Create an imagebox widget which will contains an icon indicating which layout we're using.
 	-- We need one layoutbox per screen.
 	mylayoutbox[s] = awful.widget.layoutbox(s)
 	mylayoutbox[s]:buttons(awful.util.table.join(
-						   awful.button({ }, 1, function () awful.layout.inc(layouts, 1) end),
-						   awful.button({ }, 3, function () awful.layout.inc(layouts, -1) end)))
+	awful.button({ }, 1, function () awful.layout.inc(layouts, 1) end),
+	awful.button({ }, 3, function () awful.layout.inc(layouts, -1) end)))
 	-- Create a taglist widget
 	mytaglist[s] = awful.widget.taglist(s, awful.widget.taglist.filter.all, mytaglist.buttons)
 
@@ -401,14 +387,6 @@ for s = 1, screen.count() do
 end
 -- }}}
 
--- {{{ Mouse bindings
---root.buttons(awful.util.table.join(
---	awful.button({ }, 3, function () mymainmenu:toggle() end),
---	awful.button({ }, 4, awful.tag.viewnext),
---	awful.button({ }, 5, awful.tag.viewprev)
---))
--- }}}
-
 -- {{{ Key bindings
 globalkeys = awful.util.table.join(
 
@@ -425,13 +403,13 @@ awful.key({ modkey,           }, "u", awful.client.urgent.jumpto),
 -- Standard programs
 awful.key({ modkey,           }, "Return", function () awful.util.spawn(terminal) end),
 awful.key({ modkey,           }, "e", function () awful.util.spawn(explorer_cmd) end),
-awful.key({ modkey            }, "l", function () awful.util.spawn(lock_cmd) end),
+awful.key({ modkey            }, "l", function () os.execute(lock_cmd) end),
 awful.key({ modkey            }, "r", function () awful.util.spawn("rofi -show run") end),
 
 -- Music
-awful.key({ modkey,           }, "i", function () awful.util.spawn("mpc prev") end),
-awful.key({ modkey,           }, "o", function () awful.util.spawn("mpc next") end),
-awful.key({ modkey,           }, "p", function () awful.util.spawn("mpc toggle") end),
+awful.key({ modkey,           }, "i", function () os.execute("mpc prev") end),
+awful.key({ modkey,           }, "o", function () os.execute("mpc next") end),
+awful.key({ modkey,           }, "p", function () os.execute("mpc toggle") end),
 
 -- Special keys
 awful.key({                   }, "XF86MonBrightnessUp", function () os.execute("light -A 5") end),
@@ -576,8 +554,6 @@ awful.rules.rules = {
 	properties = { tag = tags[1][2] } },
 	{ rule = { class = "Skype" },
 	properties = { tag = tags[1][3] } },
-	{ rule = { class = "Cptsoul" },
-	properties = { tag = tags[1][4] } },
 	{ rule = { instance = "tag dev" },
 	properties = { tag = tags[1][5] } },
 	{ rule = { class = "Ktorrent" },
