@@ -428,7 +428,7 @@ awful.key({                   }, "XF86AudioMute", function ()
 end),
 awful.key({                   }, "XF86Sleep", function () os.execute("systemctl suspend") end),
 awful.key({                   }, "XF86Display", function () os.execute("kana-p-screen") end),
-awful.key({                   }, "Print", function () awful.util.spawn("scrot -e 'mv $f ~/Images/shots/'") end),
+awful.key({                   }, "Print", function () os.execute("scrot -e 'mv $f ~/Images/shots/'") end),
 
 -- Layout
 awful.key({ modkey,           }, "space", function () awful.layout.inc(layouts,  1) end),
