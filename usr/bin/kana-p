@@ -16,7 +16,8 @@ export XDG_CONFIG_DIRS="/etc/xdg"
 dex -a -e Awesome
 
 kana-p-screen
-srandrd kana-p-screen
+srandrd kana-p-screen &
 
-compton -fcCbz -r 14 -o .85 -l -17 -t -17 -I 0.05 -O 0.05 -D 10 -i 0.73 --focus-exclude '!class_g *?= "URxvt"' --inactive-opacity-override --shadow-exclude-reg 'x20+0+0'
-exec bash -c "(devmon --no-gui & awesome -c /usr/share/kana-p/awesome/main.lua ) ; killall devmon"
+compton -fcCbz -r 14 -o .85 -l -17 -t -17 -I 0.05 -O 0.05 -D 10 -i 0.73 --focus-exclude '!class_g *?= "URxvt"' --inactive-opacity-override --shadow-exclude-reg 'x20+0+0' &
+devmon --no-gui & awesome -c /usr/share/kana-p/awesome/main.lua
+killall devmon
