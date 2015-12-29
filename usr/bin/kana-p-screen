@@ -1,5 +1,6 @@
 #!/bin/sh
 
+CONFIG_FILE_TMP=`mktemp`
 SCREENS_FILE=`mktemp`
 SCREENS_ORDERED_FILE=`mktemp`
 CONFIG_FILE=$HOME"/.kana-p-autoscreen.rc"
@@ -10,14 +11,14 @@ declare -A VOUTS
 eval VOUTS=$(${XRANDR} | awk 'BEGIN {printf("(")} /^\S.*connected/{printf("[%s]=%s ", $1, $2)} END{printf(")")}')
 
 # Create config file
-if [ ! -f $CONFIG_FILE ]
-then
-    touch $CONFIG_FILE
-    for VOUT in ${!VOUTS[*]}
-    do
-        echo ${VOUT} >> $CONFIG_FILE
-    done
-fi
+touch $CONFIG_FILE
+for VOUT in ${!VOUTS[*]}
+do
+	echo ${VOUT} >> $CONFIG_FILE
+done
+awk '!seen[$0]++' $CONFIG_FILE > $CONFIG_FILE_TMP
+mv $CONFIG_FILE_TMP $CONFIG_FILE
+rm -f $CONFIG_FILE_TMP
 
 # Create tmp file with list of active screens
 for VOUT in ${!VOUTS[*]}
@@ -45,6 +46,8 @@ do
     fi
 done < $CONFIG_FILE
 
+cat $SCREENS_ORDERED_FILE
+
 # Delete unordered screens list
 rm -f $SCREENS_FILE
 
@@ -66,6 +69,8 @@ do
         CMD="$CMD --output $screen --off"
     fi
 done < $SCREENS_ORDERED_FILE
+
+echo $CMD
 
 eval $CMD
 

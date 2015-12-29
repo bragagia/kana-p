@@ -1,6 +1,6 @@
 local naughty		= require("naughty")
 local gears			= require("gears")
-local awful			= require("awful")
+      awful			= require("awful")
       awful.rules	= require("awful.rules")
 			  		  require("awful.autofocus")
 local wibox			= require("wibox")
@@ -22,6 +22,32 @@ do
 end
 -- }}}
 
+local function file_exists(name)
+	local f = io.open(name, "r")
+	if f ~= nil then io.close(f) return true else return false end
+end
+
+local function doconf(name)
+	local xdg_config_home = "/home/kanak/.config"
+	--os.getenv("XDG_CONFIG_HOME")
+	local cut = string.find(xdg_config_home, ":")
+	local final_name
+
+	if cut == nil then
+		final_name = xdg_config_home
+	else
+		final_name = string.sub(xdg_config_home, 0, cut)
+	end
+	final_name = final_name .. "/kana-p/" .. name
+	
+
+	if file_exists(final_name) then
+		dofile(final_name)
+	else
+		dofile("/usr/share/kana-p/" .. name)
+	end
+end
+
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
 beautiful.init("/usr/share/kana-p/awesome/theme.lua")
@@ -32,23 +58,23 @@ naughty.config.border_width     = beautiful.notif_border_width
 naughty.config.position         = "bottom_right"
 
 -- This is used later as the default terminal.
-terminal = "urxvt"
-explorer_cmd = "xdg-open " .. os.getenv("HOME")
-lock_cmd = "light-locker-command -l"
+local terminal = "urxvt"
+local explorer_cmd = "xdg-open " .. os.getenv("HOME")
+local lock_cmd = 'bash -c "sleep 1; xset s activate"'
 
 -- Default modkey.
 -- Usually, Mod4 is the key with a logo between Control and Alt.
 -- If you do not like this or do not have such a key,
 -- I suggest you to remap Mod4 to another key using xmodmap or other tools.
 -- However, you can use another modifier like Mod1, but it may interact with others.
-modkey = "Mod4"
+local modkey = "Mod4"
 
 -- Table of layouts to cover with awful.layout.inc, order matters.
-local layouts =
+layouts =
 {
-	awful.layout.suit.floating,
 	lain.layout.uselesstile,
-	lain.layout.centerfair
+	lain.layout.centerfair,
+	awful.layout.suit.floating
 }
 
 lain.layout.centerfair.nmaster = 3
@@ -58,23 +84,9 @@ lain.layout.termfair.nmaster = 3
 lain.layout.termfair.ncol = 1
 -- }}}
 
-
--- {{{ Tags
--- Define a tag table which hold all screen tags.
+-- tags.lua use awful and layouts as global
 tags = {}
-for s = 1, screen.count() do
-	-- Each screen has its own tag table.
-	tags[s] = awful.tag({ 1, 2, 3, 4, 5, 6, 7, 8}, s, layouts[2])
-	tags[s][1].name = 'web'
-	tags[s][2].name = 'irc'
-	tags[s][3].name = 'skype'
-	tags[s][4].name = 'dev I'
-	tags[s][5].name = 'dev II'
-	tags[s][6].name = 'dev III'
-	tags[s][7].name = 'torrent'
-	tags[s][8].name = 'music'
-end
--- }}}
+doconf("tags.lua")
 
 -- battery warning
 local function trim(s)
