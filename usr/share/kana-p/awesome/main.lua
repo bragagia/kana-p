@@ -175,6 +175,7 @@ tempwidget = lain.widgets.temp({
 netdowninfo = wibox.widget.textbox()
 
 netupinfo = lain.widgets.net({
+	notify = "off",
 	settings = function()
 		widget:set_markup(markup(beautiful.info_upload, "u ") .. markup(beautiful.info_value, net_now.sent))
 		netdowninfo:set_markup(markup(beautiful.info_download, "d ") .. markup(beautiful.info_value, net_now.received))
