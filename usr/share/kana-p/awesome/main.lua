@@ -183,6 +183,7 @@ netupinfo = lain.widgets.net({
 
 -- Battery
 batwidget = lain.widgets.bat({
+	timeout = 1,
 	settings = function()
 		local status
 		if bat_now.status == "Discharging" then
