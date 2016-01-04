@@ -184,12 +184,22 @@ netupinfo = lain.widgets.net({
 -- Battery
 batwidget = lain.widgets.bat({
 	settings = function()
-		if bat_now.perc == "N/A" then
-			bat_now.perc = "AC"
+		local status
+		if bat_now.status == "Discharging" then
+			status = "d"
 		else
-			bat_now.perc = bat_now.perc
+			status = "u"
 		end
-		widget:set_markup(markup(beautiful.info_battery, "b ") .. markup(beautiful.info_value, bat_now.perc))
+
+		local value
+		if bat_now.perc == "N/A" then
+			value = "AC"
+			status = "u"
+		else
+			value = bat_now.perc
+		end
+
+		widget:set_markup(markup(beautiful.info_battery, "b ") .. markup(beautiful.info_value, value .. status))
 	end
 })
 
