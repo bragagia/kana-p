@@ -61,8 +61,10 @@ theme.border_focus  = "#C34040"
 theme.useless_gap_width = "15"
 
 -- {{{ Titlebars
-theme.titlebar_bg_focus  = "#202020"
-theme.titlebar_bg_normal = "#202020"
+theme.titlebar_bg_focus  = "#2F343F"
+theme.titlebar_bg_normal = "#2F343F"
+--theme.titlebar_bg_focus  = "#202020"
+--theme.titlebar_bg_normal = "#202020"
 -- }}}
 
 -- There are other variable sets
