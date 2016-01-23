@@ -5,8 +5,6 @@ xrdb -load /usr/share/kana-p/Xresources
 synclient HorizTwoFingerScroll=1
 
 export QT_STYLE_OVERRIDE=GTK+
-#export GTK2_RC_FILES=/usr/share/themes/Arc-Dark/gtk-2.0/gtkrc
-#export GTK_THEME=Arc-Dark
 
 export XDG_CONFIG_HOME="$HOME""/.config"
 export XDG_CACHE_HOME="$HOME""/.cache"
@@ -14,11 +12,11 @@ export XDG_DATA_HOME="$HOME""/.local/share"
 export XDG_DATA_DIRS="/usr/local/share:/usr/share"
 export XDG_CONFIG_DIRS="/etc/xdg"
 
-if [ ! -a "$HOME""/.xsettingsd" ]; then
+if [ ! -f "$HOME""/.xsettingsd" ]; then
 	cp /usr/share/kana-p/xsettingsd "$HOME""/.xsettingsd"
 fi
 
-xsettingsd -c "$HOME""/.xsettingsd"
+xsettingsd -c "$HOME""/.xsettingsd" &
 
 dex -a -e Awesome
 
