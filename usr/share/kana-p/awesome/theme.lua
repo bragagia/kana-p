@@ -52,7 +52,7 @@ theme.info_cpu = "#F3AE73"
 theme.info_battery = "#DA645A" 
 theme.info_temp ="#8D4548" 
 theme.info_spacer = "#808080"
-theme.info_value = theme.fg_normal
+theme.info_value = "ffffff"
 
 -- {{{ Borders
 theme.border_width  = "0"
