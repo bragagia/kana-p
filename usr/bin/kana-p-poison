@@ -63,12 +63,8 @@ elif [[ $mode == "install" ]]; then
 	systemctl enable NetworkManager.service > /dev/null
 
 	sed -i "s#^background=.*\$#background=/usr/share/kana-p/login-wallpaper.jpg#g" /etc/lightdm/lightdm-webkit-greeter.conf
-	sed -i "s#^\#greeter-session=.*\$#greeter-session=lightdm-gtk-greeter#g" /etc/lightdm/lightdm.conf
+	sed -i "s#^\#greeter-session=.*\$#greeter-session=lightdm-webkit-greeter#g" /etc/lightdm/lightdm.conf
 	sed -i "s#^webkit-theme=.*\$#webkit-theme=Bevel#g" /etc/lightdm/lightdm-webkit-greeter.conf
-
-	sed -i "s#^\#background=.*\$#background=/usr/share/backgrounds/login.jpg#g" /etc/lightdm/lightdm-gtk-greeter.conf
-	sed -i "s#^\#theme-name=.*\$#theme-name=Arc-Dark#g" /etc/lightdm/lightdm-gtk-greeter.conf
-	sed -i "s#^\#icon-theme-name=.*\$#icon-theme-name=Numix-Bevel#g" /etc/lightdm/lightdm-gtk-greeter.conf
 
 
 elif [[ $mode == "uninstall" ]]; then
@@ -78,10 +74,6 @@ elif [[ $mode == "uninstall" ]]; then
 	systemctl disable NetworkManager.service > /dev/null
 
 	sed -i 's#^background=/usr/share/kana-p/login-wallpaper.jpg$#background=#g' /etc/lightdm/lightdm-webkit-greeter.conf
-	sed -i "s#^greeter-session=lightdm-gtk-greeter\$#\#greeter-session=#g" /etc/lightdm/lightdm.conf
+	sed -i "s#^greeter-session=lightdm-webkit-greeter\$#\#greeter-session=#g" /etc/lightdm/lightdm.conf
 	sed -i "s#^webkit-theme=Bevel\$#webkit-theme=webkit#g" /etc/lightdm/lightdm-webkit-greeter.conf
-
-	sed -i "s#^background=/usr/share/backgrounds/login.jpg\$#\#background=#g" /etc/lightdm/lightdm-gtk-greeter.conf
-	sed -i "s#^theme-name=Arc-Dark\$#\#theme-name=#g" /etc/lightdm/lightdm-gtk-greeter.conf
-	sed -i "s#^icon-theme-name=Numix-Bevel\$#\#icon-theme-name=#g" /etc/lightdm/lightdm-gtk-greeter.conf
 fi
