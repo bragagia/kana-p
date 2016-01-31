@@ -25,7 +25,7 @@ theme.layout_magnifier              = theme.confdir .. "/icons/magnifier.png"
 theme.layout_floating               = theme.confdir .. "/icons/floating.png"
 
 -- {{{ Colors
-theme.fg_normal = "#afb9c6"
+theme.fg_normal = "#898f9a"
 theme.fg_focus  = "#ffffff"
 theme.fg_urgent = "#d01e2d"
 --theme.fg_urgent = "#E7212A"
