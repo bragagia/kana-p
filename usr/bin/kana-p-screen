@@ -3,7 +3,11 @@
 CONFIG_FILE_TMP=`mktemp`
 SCREENS_FILE=`mktemp`
 SCREENS_ORDERED_FILE=`mktemp`
-CONFIG_FILE=$HOME"/.kana-p-autoscreen.rc"
+if [ "$1" == "-d" ]; then
+	CONFIG_FILE=`mktemp`
+else
+	CONFIG_FILE=$HOME"/.kana-p-autoscreen.rc"
+fi
 
 XRANDR="xrandr"
 
@@ -76,9 +80,18 @@ eval $CMD
 
 rm -f $SCREENS_ORDERED_FILE
 
-if [ -a "$HOME/.fehbg" ]
+if [ "$1" == "-d" ]
 then
-	$HOME/.fehbg
+		feh --bg-fill '/usr/share/backgrounds/login.jpg'
 else
-	feh --bg-fill '/usr/share/kana-p/wallpaper.jpg'
+	if [ -a "$HOME/.fehbg" ]
+	then
+		$HOME/.fehbg
+	else
+		feh --bg-fill '/usr/share/kana-p/wallpaper.jpg'
+	fi
+fi
+
+if [ "$1" == "-d" ]; then
+	rm "$CONFIG_FILE"
 fi
