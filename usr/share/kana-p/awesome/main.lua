@@ -60,7 +60,7 @@ naughty.config.position         = "bottom_right"
 -- This is used later as the default terminal.
 local terminal = "urxvt"
 local explorer_cmd = "xdg-open " .. os.getenv("HOME")
-local lock_cmd = 'light-locker-command -l'
+local lock_cmd = 'i3lock-wrapper -e'
 
 -- Default modkey.
 -- Usually, Mod4 is the key with a logo between Control and Alt.
