@@ -66,6 +66,15 @@ theme.titlebar_bg_normal = "#2F343F"
 --theme.titlebar_bg_normal = "#202020"
 -- }}}
 
+-- {{{ Menu
+
+theme.menu_bg_normal = "#000000"
+theme.menu_bg_focus = "#00000000"
+theme.menu_width = 200
+theme.menu_submenu_icon      = "/usr/share/awesome/themes/default/submenu.png"
+
+-- }}}
+
 -- There are other variable sets
 -- overriding the default one when
 -- defined, the sets are:
@@ -117,7 +126,6 @@ theme.titlebar_maximized_button_normal_active = "/usr/share/awesome/themes/defau
 theme.titlebar_maximized_button_focus_active  = "/usr/share/awesome/themes/default/titlebar/maximized_focus_active.png"
 
 -- {{{ Misc
-theme.menu_submenu_icon      = "/usr/share/awesome/themes/default/submenu.png"
 theme.tasklist_floating_icon = "/usr/share/awesome/themes/default/tasklist/floatingw.png"
 -- }}}
 
