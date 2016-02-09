@@ -62,6 +62,26 @@ local terminal = "urxvt"
 local explorer_cmd = "xdg-open " .. os.getenv("HOME")
 local lock_cmd = 'i3lock-wrapper -e'
 
+-- Menu
+
+local xdg_menu      = dofile("/tmp/kana-p-" .. os.getenv("USER") .. "-xdg_menu.lua");
+
+function TableConcat(t1,t2)
+    for i=1,#t2 do
+        t1[#t1+1] = t2[i]
+    end
+    return t1
+end
+
+local kanapmenu = {
+	{ "lock", lock_cmd },
+	{ "close session", awesome.quit },
+	{ "halt", "systemctl poweroff" },
+	{ "reboot", "systemctl reboot" }
+}
+
+mymainmenu = awful.menu({ items = TableConcat(xdgmenu, kanapmenu) })
+
 -- Default modkey.
 -- Usually, Mod4 is the key with a logo between Control and Alt.
 -- If you do not like this or do not have such a key,
@@ -256,6 +276,7 @@ awful.button({ }, 4, function(t) awful.tag.viewnext(awful.tag.getscreen(t)) end)
 awful.button({ }, 5, function(t) awful.tag.viewprev(awful.tag.getscreen(t)) end)
 )
 mysystray = {}
+mymainmenubutton = {}
 globalsystray = wibox.widget.systray()
 --globalsystray:set_bg("#00000000")
 mytasklist = {}
@@ -345,10 +366,16 @@ for s = 1, screen.count() do
 	end)
 	))
 
+	mymainmenubutton[s] = {}
+	mymainmenubutton[s].widget = wibox.widget.textbox("")
+	mymainmenubutton[s].widget:set_markup(markup(beautiful.info_spacer, " v "))
+	mymainmenubutton[s].widget:buttons(awful.util.table.join( awful.button({ }, 1, function () mymainmenu:toggle() end )))
+
 	-- Widgets that are aligned to the left
 	local left_layout = wibox.layout.fixed.horizontal()
 	left_layout:add(spacer)
 	left_layout:add(spacer)
+	left_layout:add(mymainmenubutton[s].widget)
 	left_layout:add(mytaglist[s])
 
 	-- Widgets that are aligned to the right
