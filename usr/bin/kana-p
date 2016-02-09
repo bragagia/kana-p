@@ -1,6 +1,7 @@
 #!/bin/sh
 
 xset b off
+xset s off -dpms
 xrdb -load /usr/share/kana-p/Xresources
 synclient HorizTwoFingerScroll=1
 
