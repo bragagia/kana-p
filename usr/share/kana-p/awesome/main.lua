@@ -455,7 +455,7 @@ awful.key({ modkey,           }, "u", awful.client.urgent.jumpto),
 awful.key({ modkey,           }, "Return", function () awful.util.spawn(terminal) end),
 awful.key({ modkey,           }, "e", function () awful.util.spawn(explorer_cmd) end),
 awful.key({ modkey            }, "l", function () os.execute(lock_cmd) end),
-awful.key({ modkey            }, "r", function () awful.util.spawn("rofi -show run") end),
+awful.key({ modkey            }, "r", function () awful.util.spawn('rofi -bg "#2F343F" -fg "#898F9A" -font "ohsnap 14" -show run') end),
 
 -- Music
 awful.key({ modkey,           }, "i", function () os.execute("mpc prev") end),
