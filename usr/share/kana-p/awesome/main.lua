@@ -4,7 +4,7 @@ local gears			= require("gears")
       awful.rules	= require("awful.rules")
 			  		  require("awful.autofocus")
 local wibox			= require("wibox")
-local beautiful		= require("beautiful")
+      beautiful		= require("beautiful")
 local lain			= require("lain")
 
 -- Handle runtime errors after startup
@@ -28,8 +28,7 @@ local function file_exists(name)
 end
 
 local function doconf(name)
-	local xdg_config_home = "/home/kanak/.config"
-	--os.getenv("XDG_CONFIG_HOME")
+	local xdg_config_home = os.getenv("XDG_CONFIG_HOME")
 	local cut = string.find(xdg_config_home, ":")
 	local final_name
 
@@ -39,12 +38,11 @@ local function doconf(name)
 		final_name = string.sub(xdg_config_home, 0, cut)
 	end
 	final_name = final_name .. "/kana-p/" .. name
-	
 
 	if file_exists(final_name) then
 		dofile(final_name)
 	else
-		dofile("/usr/share/kana-p/" .. name)
+		dofile("/usr/share/kana-p/config/" .. name)
 	end
 end
 
@@ -93,15 +91,14 @@ local modkey = "Mod4"
 layouts =
 {
 	lain.layout.uselesstile,
-	lain.layout.centerfair,
+	lain.layout.uselesstile.bottom,
+	--lain.layout.centerhwork,
+	lain.layout.centerworkd,
+	--lain.layout.centerwork,
+	lain.layout.termfair,
 	awful.layout.suit.floating
 }
 
-lain.layout.centerfair.nmaster = 3
-lain.layout.centerfair.ncol = 1
-
-lain.layout.termfair.nmaster = 3
-lain.layout.termfair.ncol = 1
 -- }}}
 
 -- tags.lua use awful and layouts as global
@@ -268,12 +265,12 @@ mywibox = {}
 mylayoutbox = {}
 mytaglist = {}
 mytaglist.buttons = awful.util.table.join(
-awful.button({ }, 1, awful.tag.viewonly),
-awful.button({ modkey }, 1, awful.client.movetotag),
-awful.button({ }, 3, awful.tag.viewtoggle),
-awful.button({ modkey }, 3, awful.client.toggletag),
-awful.button({ }, 4, function(t) awful.tag.viewnext(awful.tag.getscreen(t)) end),
-awful.button({ }, 5, function(t) awful.tag.viewprev(awful.tag.getscreen(t)) end)
+	awful.button({ }, 1, awful.tag.viewonly),
+	awful.button({ modkey }, 1, awful.client.movetotag),
+	awful.button({ }, 3, awful.tag.viewtoggle),
+	awful.button({ modkey }, 3, awful.client.toggletag),
+	awful.button({ }, 4, function(t) awful.tag.viewnext(awful.tag.getscreen(t)) end),
+	awful.button({ }, 5, function(t) awful.tag.viewprev(awful.tag.getscreen(t)) end)
 )
 mysystray = {}
 mymainmenubutton = {}
@@ -447,20 +444,21 @@ awful.key({ modkey, "Shift"   }, "q", awesome.quit),
 --awful.key({ modkey, "Shift"   }, "w", function () mytaskbox[mouse.screen].visible = not mytaskbox[mouse.screen].visible end),
 
 -- Tag manipulation
-awful.key({ modkey,			  }, "Left", awful.tag.viewprev),
-awful.key({ modkey,			  }, "Right", awful.tag.viewnext),
-awful.key({ modkey,           }, "u", awful.client.urgent.jumpto),
+awful.key({ modkey  		  }, "Left", awful.tag.viewprev),
+awful.key({ modkey  		  }, "Right", awful.tag.viewnext),
+awful.key({ modkey            }, "u", awful.client.urgent.jumpto),
 
 -- Standard programs
-awful.key({ modkey,           }, "Return", function () awful.util.spawn(terminal) end),
-awful.key({ modkey,           }, "e", function () awful.util.spawn(explorer_cmd) end),
+awful.key({ modkey            }, "Return", function () awful.util.spawn(terminal) end),
+awful.key({ modkey            }, "e", function () awful.util.spawn(explorer_cmd) end),
 awful.key({ modkey            }, "l", function () os.execute(lock_cmd) end),
+awful.key({ modkey, "Shift"   }, "r", function () awful.util.spawn('gksudo rofi -bg "#2F343F" -fg "#898F9A" -font "ohsnap 14" -show run') end),
 awful.key({ modkey            }, "r", function () awful.util.spawn('rofi -bg "#2F343F" -fg "#898F9A" -font "ohsnap 14" -show run') end),
 
 -- Music
-awful.key({ modkey,           }, "i", function () os.execute("mpc prev") end),
-awful.key({ modkey,           }, "o", function () os.execute("mpc next") end),
-awful.key({ modkey,           }, "p", function () os.execute("mpc toggle") end),
+awful.key({ modkey            }, "i", function () os.execute("mpc prev") end),
+awful.key({ modkey            }, "o", function () os.execute("mpc next") end),
+awful.key({ modkey            }, "p", function () os.execute("mpc toggle") end),
 
 -- Special keys
 awful.key({                   }, "XF86MonBrightnessUp", function () os.execute("light -A 5") end),
@@ -482,7 +480,13 @@ awful.key({                   }, "XF86Display", function () os.execute("kana-p-s
 awful.key({                   }, "Print", function () os.execute("scrot -e 'mv $f ~/Images/shots/'") end),
 
 -- Layout
-awful.key({ modkey,           }, "space", function () awful.layout.inc(layouts,  1) end),
+awful.key({ modkey            }, "q",     function () awful.tag.incmwfact( 0.05)    end),
+awful.key({ modkey            }, "w",     function () awful.tag.incmwfact(-0.05)    end),
+awful.key({ modkey            }, "s",     function () awful.tag.incnmaster( 1)      end),
+awful.key({ modkey            }, "x",     function () awful.tag.incnmaster(-1)      end),
+awful.key({ modkey            }, "f",     function () awful.tag.incncol( 1)         end),
+awful.key({ modkey            }, "v",     function () awful.tag.incncol(-1)         end),
+awful.key({ modkey            }, "space", function () awful.layout.inc(layouts,  1) end),
 awful.key({ modkey, "Shift"   }, "space", function () awful.layout.inc(layouts, -1) end),
 
 -- Client
@@ -492,14 +496,14 @@ awful.key({ modkey, "Shift"   }, "Right", function () awful.client.swap.byidx( -
 )
 
 clientkeys = awful.util.table.join(
-awful.key({ modkey,           }, "a",	  function (c) c.fullscreen = not c.fullscreen  end),
-awful.key({ modkey,           }, "c",	  function (c) c:kill()						 end),
-awful.key({ modkey,           }, "f",	  awful.client.floating.toggle					 ),
+awful.key({ modkey            }, "a",	  function (c) c.fullscreen = not c.fullscreen  end),
+awful.key({ modkey            }, "c",	  function (c) c:kill()						 end),
+awful.key({ modkey            }, "f",	  awful.client.floating.toggle					 ),
 awful.key({ modkey, "Control" }, "Return", function (c) c:swap(awful.client.getmaster()) end),
 
-awful.key({ modkey,           }, "n", function (c) c.minimized = true end),
+awful.key({ modkey            }, "n", function (c) c.minimized = true end),
 
-awful.key({ modkey,		   }, "m",
+awful.key({ modkey            }, "m",
 function (c)
 	c.maximized_horizontal = not c.maximized_horizontal
 	c.maximized_vertical   = c.maximized_horizontal
@@ -586,38 +590,8 @@ root.keys(globalkeys)
 
 -- {{{ Rules
 -- Rules to apply to new clients (through the "manage" signal).
-awful.rules.rules = {
-	-- All clients will match this rule.
-	{ rule = { },
-	properties = { border_width = beautiful.border_width,
-	border_color = beautiful.border_normal,
-	focus = awful.client.focus.filter,
-	raise = true,
-	keys = clientkeys,
-	maximized_vertical = false,
-	maximized_horizontal = false,
-	buttons = clientbuttons } },
-	{ rule = { class = "Vlc" },
-	properties = { sticky = true, titlebar = none } },
-	{ rule_any = { class = {"URxvt", "XTerm"} },
-	properties = { size_hints_honor = false} },
-	{ rule = { instance = "weechat" },
-	properties = { tag = tags[1][2] } },
-	{ rule = { class = "Skype" },
-	properties = { tag = tags[1][3] } },
-	{ rule = { instance = "tag dev" },
-	properties = { tag = tags[1][5] } },
-	{ rule = { class = "Ktorrent" },
-	properties = { tag = tags[1][8], urgent = false } },
-	{ rule = { instance = "ncmpcpp" },
-	properties = { tag = tags[1][9] } },
-	{ rule = { class = "gimp" },
-	properties = { floating = true } },
-	{ rule = { instance = "plugin-container" },
-	properties = { floating = true, focus = yes } },
-	{ rule_any = { class = {"Firefox", "Chromium"} },
-	properties = { tag = tags[1][1] } }
-}
+awful.rules.rules = {}
+doconf("rules.lua")
 -- }}}
 
 -- {{{ Signals
