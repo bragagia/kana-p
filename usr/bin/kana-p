@@ -28,6 +28,10 @@ unclutter -idle 2 -jitter 10 &
 
 xdg_menu --format awesome --root-menu /etc/xdg/menus/arch-applications.menu > /tmp/kana-p-$USER-xdg_menu.lua
 
+if [ ! -f "$HOME""/.kana-p-startup" ]; then
+	bash "$HOME""/.kana-p-startup"
+fi
+
 compton -fcCbz -r 14 -o .85 -l -17 -t -17 -I 0.05 -O 0.05 -D 10 -i 0.73 --focus-exclude '!class_g *?= "URxvt"' --inactive-opacity-override --shadow-exclude-reg 'x20+0+0' &
 devmon --no-gui & awesome -c /usr/share/kana-p/awesome/main.lua
 
