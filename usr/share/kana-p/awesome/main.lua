@@ -56,9 +56,10 @@ naughty.config.border_width     = beautiful.notif_border_width
 naughty.config.position         = "bottom_right"
 
 -- This is used later as the default terminal.
-local terminal = "urxvt"
-local explorer_cmd = "xdg-open " .. os.getenv("HOME")
-local lock_cmd = 'i3lock-wrapper -e'
+terminal = "urxvt"
+explorer_cmd = "xdg-open " .. os.getenv("HOME")
+lock_cmd = 'i3lock-wrapper -e'
+launcher = 'rofi -font "ohsnap 14" -show run'
 
 -- Menu
 
@@ -85,7 +86,7 @@ mymainmenu = awful.menu({ items = TableConcat(xdgmenu, kanapmenu) })
 -- If you do not like this or do not have such a key,
 -- I suggest you to remap Mod4 to another key using xmodmap or other tools.
 -- However, you can use another modifier like Mod1, but it may interact with others.
-local modkey = "Mod4"
+modkey = "Mod4"
 
 -- Table of layouts to cover with awful.layout.inc, order matters.
 layouts =
@@ -194,8 +195,8 @@ netdowninfo = wibox.widget.textbox()
 netupinfo = lain.widgets.net({
 	notify = "off",
 	settings = function()
-		widget:set_markup(markup(beautiful.info_upload, "u ") .. markup(beautiful.info_value, net_now.sent))
-		netdowninfo:set_markup(markup(beautiful.info_download, "d ") .. markup(beautiful.info_value, net_now.received))
+		widget:set_markup(markup(beautiful.info_upload, "u ") .. markup(beautiful.info_value, string.format("%.2f", net_now.sent / 1024)))
+		netdowninfo:set_markup(markup(beautiful.info_download, "d ") .. markup(beautiful.info_value, string.format("%.2f", net_now.received / 1024)))
 	end
 })
 
@@ -435,104 +436,10 @@ for s = 1, screen.count() do
 end
 -- }}}
 
--- {{{ Key bindings
-globalkeys = awful.util.table.join(
-
--- Awesome manipulation
-awful.key({ modkey, "Shift"   }, "r", awesome.restart),
-awful.key({ modkey, "Shift"   }, "q", awesome.quit),
---awful.key({ modkey, "Shift"   }, "w", function () mytaskbox[mouse.screen].visible = not mytaskbox[mouse.screen].visible end),
-
--- Tag manipulation
-awful.key({ modkey  		  }, "Left", awful.tag.viewprev),
-awful.key({ modkey  		  }, "Right", awful.tag.viewnext),
-awful.key({ modkey            }, "u", awful.client.urgent.jumpto),
-
--- Standard programs
-awful.key({ modkey            }, "Return", function () awful.util.spawn(terminal) end),
-awful.key({ modkey            }, "e", function () awful.util.spawn(explorer_cmd) end),
-awful.key({ modkey            }, "l", function () os.execute(lock_cmd) end),
-awful.key({ modkey, "Shift"   }, "r", function () awful.util.spawn('gksudo rofi -bg "#2F343F" -fg "#898F9A" -font "ohsnap 14" -show run') end),
-awful.key({ modkey            }, "r", function () awful.util.spawn('rofi -bg "#2F343F" -fg "#898F9A" -font "ohsnap 14" -show run') end),
-
--- Music
-awful.key({ modkey            }, "i", function () os.execute("mpc prev") end),
-awful.key({ modkey            }, "o", function () os.execute("mpc next") end),
-awful.key({ modkey            }, "p", function () os.execute("mpc toggle") end),
-
--- Special keys
-awful.key({                   }, "XF86MonBrightnessUp", function () os.execute("light -A 5") end),
-awful.key({                   }, "XF86MonBrightnessDown", function () os.execute("light -U 5") end),
-awful.key({                   }, "XF86AudioLowerVolume", function ()
-	os.execute("pulseaudio-ctl down 3")
-	volumewidget.update()
-end),
-awful.key({                   }, "XF86AudioRaiseVolume", function ()
-	os.execute("pulseaudio-ctl up 3")
-	volumewidget.update()
-end),
-awful.key({                   }, "XF86AudioMute", function ()
-	os.execute("pulseaudio-ctl mute")
-	volumewidget.update()
-end),
-awful.key({                   }, "XF86Sleep", function () os.execute("systemctl suspend") end),
-awful.key({                   }, "XF86Display", function () os.execute("kana-p-screen") end),
-awful.key({                   }, "Print", function () os.execute("scrot -e 'mv $f ~/Images/shots/'") end),
-
--- Layout
-awful.key({ modkey            }, "q",     function () awful.tag.incmwfact( 0.05)    end),
-awful.key({ modkey            }, "w",     function () awful.tag.incmwfact(-0.05)    end),
-awful.key({ modkey            }, "s",     function () awful.tag.incnmaster( 1)      end),
-awful.key({ modkey            }, "x",     function () awful.tag.incnmaster(-1)      end),
-awful.key({ modkey            }, "f",     function () awful.tag.incncol( 1)         end),
-awful.key({ modkey            }, "v",     function () awful.tag.incncol(-1)         end),
-awful.key({ modkey            }, "space", function () awful.layout.inc(layouts,  1) end),
-awful.key({ modkey, "Shift"   }, "space", function () awful.layout.inc(layouts, -1) end),
-
--- Client
-awful.key({ modkey, "Control" }, "n", awful.client.restore),
-awful.key({ modkey, "Shift"   }, "Left", function () awful.client.swap.byidx(  1)	end),
-awful.key({ modkey, "Shift"   }, "Right", function () awful.client.swap.byidx( -1)	end)
-)
-
-clientkeys = awful.util.table.join(
-awful.key({ modkey            }, "a",	  function (c) c.fullscreen = not c.fullscreen  end),
-awful.key({ modkey            }, "c",	  function (c) c:kill()						 end),
-awful.key({ modkey            }, "f",	  awful.client.floating.toggle					 ),
-awful.key({ modkey, "Control" }, "Return", function (c) c:swap(awful.client.getmaster()) end),
-
-awful.key({ modkey            }, "n", function (c) c.minimized = true end),
-
-awful.key({ modkey            }, "m",
-function (c)
-	c.maximized_horizontal = not c.maximized_horizontal
-	c.maximized_vertical   = c.maximized_horizontal
-end),
-
-awful.key({ modkey, "Control" }, "Down",
-function()
-	awful.client.focus.bydirection("down")
-	if client.focus then client.focus:raise() end
-end),
-
-awful.key({ modkey, "Control" }, "Up",
-function()
-	awful.client.focus.bydirection("up")
-	if client.focus then client.focus:raise() end
-end),
-
-awful.key({ modkey, "Control" }, "Left",
-function()
-	awful.client.focus.bydirection("left")
-	if client.focus then client.focus:raise() end
-end),
-
-awful.key({ modkey, "Control" }, "Right",
-function()
-	awful.client.focus.bydirection("right")
-	if client.focus then client.focus:raise() end
-end)
-)
+keys = {}
+keys.bindings = {}
+doconf("keybindings.lua")
+globalkeys = keys.bindings
 
 -- Bind all key numbers to tags.
 -- Be careful: we use keycodes to make it works on any keyboard layout.
