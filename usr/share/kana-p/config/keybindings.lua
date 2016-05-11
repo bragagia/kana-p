@@ -1,5 +1,5 @@
 -- {{{ Key bindings
-keys.bindings = awful.util.table.join(
+globalkeys = awful.util.table.join(
 
 -- Awesome manipulation
 awful.key({ modkey, "Shift"   }, "r", awesome.restart),

@@ -436,10 +436,8 @@ for s = 1, screen.count() do
 end
 -- }}}
 
-keys = {}
-keys.bindings = {}
+globalkeys = { }
 doconf("keybindings.lua")
-globalkeys = keys.bindings
 
 -- Bind all key numbers to tags.
 -- Be careful: we use keycodes to make it works on any keyboard layout.
