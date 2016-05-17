@@ -11,6 +11,16 @@ awful.key({ modkey  		  }, "Right", awful.tag.viewnext),
 awful.key({ modkey            }, "u", awful.client.urgent.jumpto),
 
 -- Standard programs
+awful.key({ modkey            }, "F1", function () mywibox[mouse.screen].visible = false end),
+awful.key({ modkey            }, "F2", function () mywibox[mouse.screen].visible = true end),
+awful.key({ modkey            }, "d",
+function ()
+	if mywibox[mouse.screen].visible then
+		mywibox[mouse.screen].visible = false
+	else
+		mywibox[mouse.screen].visible = true
+	end
+end),
 awful.key({ modkey            }, "Return", function () awful.util.spawn(terminal) end),
 awful.key({ modkey            }, "e", function () awful.util.spawn(explorer_cmd) end),
 awful.key({ modkey            }, "l", function () os.execute(lock_cmd) end),

@@ -326,6 +326,7 @@ for s = 1, screen.count() do
 
 	-- Create the wibox
 	mywibox[s] = awful.wibox({ position = "top", screen = s, height = 20 })
+	mywibox[s].visible = false
 
 	mysystray[s] = {}
 	mysystray[s].stupid_bug = drawin({})
