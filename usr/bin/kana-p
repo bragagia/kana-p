@@ -1,5 +1,7 @@
 #!/bin/sh
 
+### Settings
+
 xset b off
 xset s off -dpms
 xrdb -load /usr/share/kana-p/Xresources
@@ -16,23 +18,42 @@ export XDG_CONFIG_DIRS="/etc/xdg"
 if [ ! -f "$HOME""/.xsettingsd" ]; then
 	cp /usr/share/kana-p/xsettingsd "$HOME""/.xsettingsd"
 fi
-
 xsettingsd -c "$HOME""/.xsettingsd" &
 
-dex -a -e Awesome
+unclutter -idle 2 -jitter 10 &
+
+### Drivers
 
 kana-p-screen
 srandrd kana-p-screen &
 
-unclutter -idle 2 -jitter 10 &
+devmon --no-gui &
+trap "killall devmon" EXIT
 
-xdg_menu --format awesome --root-menu /etc/xdg/menus/arch-applications.menu > /tmp/kana-p-$USER-xdg_menu.lua
+### Composition manager
+
+compton -fcCz -r 8 -o 1.0 -l -13 -t -13 -I 0.08 -O 0.08 -D 20 --opacity-rule '92:class_g *?= "URxvt" && focused' --opacity-rule '65:class_g *?= "URxvt" && !focused' --blur-background --blur-kern 7x7box -b &
+
+### Lock
+
+xss-lock i3lock-wrapper -e &
+trap "killall xss-lock" EXIT
+
+### User scripts
 
 if [ ! -f "$HOME""/.kana-p-startup" ]; then
 	bash "$HOME""/.kana-p-startup"
 fi
 
-compton -fcCz -r 8 -o 1.0 -l -13 -t -13 -I 0.08 -O 0.08 -D 20 --opacity-rule '92:class_g *?= "URxvt" && focused' --opacity-rule '65:class_g *?= "URxvt" && !focused' --blur-background --blur-kern 7x7box -b &
-devmon --no-gui & awesome -c /usr/share/kana-p/awesome/main.lua
+### WM
 
-killall devmon
+xdg_menu --format awesome --root-menu /etc/xdg/menus/arch-applications.menu > /tmp/kana-p-$USER-xdg_menu.lua
+awesome -c /usr/share/kana-p/awesome/main.lua &
+
+pid="$!"
+
+sleep 0.5
+
+dex -a -e Awesome
+
+wait $pid

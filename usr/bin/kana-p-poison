@@ -69,6 +69,7 @@ elif [[ $mode == "install" ]]; then
 	sed -i "s#^\#greeter-session=.*\$#greeter-session=lightdm-webkit-greeter#g" /etc/lightdm/lightdm.conf
 	sed -i "s#^\#display-setup-script=.*\$#display-setup-script=/usr/bin/kana-p-screen -d#g" /etc/lightdm/lightdm.conf
 	sed -i "s#^webkit-theme=.*\$#webkit-theme=Bevel#g" /etc/lightdm/lightdm-webkit-greeter.conf
+	sed -i "s#-blur 0x3 #-blur 0x15 #g" /usr/bin/i3lock-wrapper
 
 elif [[ $mode == "uninstall" ]]; then
 	echo "### Kana-p - unpoison"
@@ -83,4 +84,5 @@ elif [[ $mode == "uninstall" ]]; then
 	sed -i "s#^greeter-session=lightdm-webkit-greeter\$#\#greeter-session=#g" /etc/lightdm/lightdm.conf
 	sed -i "s#display-setup-script=/usr/bin/kana-p-screen -d#\#display-setup-script=#g" /etc/lightdm/lightdm.conf
 	sed -i "s#^webkit-theme=Bevel\$#webkit-theme=webkit#g" /etc/lightdm/lightdm-webkit-greeter.conf
+	sed -i "s#-blur 0x15 #-blur 0x3 #g" /usr/bin/i3lock-wrapper
 fi
