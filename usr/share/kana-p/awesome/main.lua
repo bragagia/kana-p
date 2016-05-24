@@ -56,11 +56,11 @@ naughty.config.border_width     = beautiful.notif_border_width
 naughty.config.position         = "bottom_right"
 
 -- This is used later as the default terminal.
-terminal = "urxvt"
+terminal = "kana-p-term"
 explorer_cmd = "xdg-open " .. os.getenv("HOME")
-lock_cmd = 'i3lock-wrapper -e'
-launcher = 'rofi -show run'
-close_session = 'killall devmon'
+lock_cmd = 'kana-p-lock'
+launcher = 'kana-p-launcher'
+close_session = 'kana-p-close-session'
 
 -- Menu
 
