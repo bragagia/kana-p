@@ -34,21 +34,24 @@ compton -fcCz -r 8 -o 1.0 -l -9 -t -9 -I 0.08 -O 0.08 -D 20 --opacity-rule '92:c
 
 ### Lock
 
-xss-lock i3lock-wrapper -e &
-trap "killall xss-lock" EXIT
+#xss-lock i3lock-wrapper -e &
+#trap "killall xss-lock" EXIT
 
 ### User scripts
 
-if [ ! -f "$HOME""/.kana-p-startup" ]; then
-	bash "$HOME""/.kana-p-startup"
+if [ -f "$HOME""/.kana-p-startup" ]; then
+	source "$HOME""/.kana-p-startup"
 fi
 
 ### WM
 
-xdg_menu --format awesome --root-menu /etc/xdg/menus/arch-applications.menu > /tmp/kana-p-$USER-xdg_menu.lua
-awesome -c /usr/share/kana-p/awesome/main.lua &
-
-pid="$!"
+if [ -z "$WM_PID" ]; then
+	xdg_menu --format awesome --root-menu /etc/xdg/menus/arch-applications.menu > /tmp/kana-p-$USER-xdg_menu.lua
+	awesome -c /usr/share/kana-p/awesome/main.lua &
+	pid=$!
+else
+	pid="$WM_PID"
+fi
 
 sleep 0.5
 
