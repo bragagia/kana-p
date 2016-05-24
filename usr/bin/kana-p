@@ -20,8 +20,6 @@ if [ ! -f "$HOME""/.xsettingsd" ]; then
 fi
 xsettingsd -c "$HOME""/.xsettingsd" &
 
-unclutter -idle 2 -jitter 10 &
-
 ### Drivers
 
 kana-p-screen
