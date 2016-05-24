@@ -59,7 +59,7 @@ naughty.config.position         = "bottom_right"
 terminal = "urxvt"
 explorer_cmd = "xdg-open " .. os.getenv("HOME")
 lock_cmd = 'i3lock-wrapper -e'
-launcher = 'rofi -font "ohsnap 14" -color-normal "#273238,#c1c1c1,#273238,#394249,#ffffff" -color-window "#273238,#273238,#1e2529" -fullscreen -show run'
+launcher = 'rofi -show run'
 close_session = 'killall devmon'
 
 -- Menu
