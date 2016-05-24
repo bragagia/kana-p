@@ -26,6 +26,7 @@ kana-p-screen
 srandrd kana-p-screen &
 
 devmon --no-gui &
+service_pid=$!
 trap "killall devmon" EXIT
 
 ### Composition manager
@@ -45,16 +46,20 @@ fi
 
 ### WM
 
-if [ -z "$WM_PID" ]; then
+if [ -z "$NO_WM" ]; then
 	xdg_menu --format awesome --root-menu /etc/xdg/menus/arch-applications.menu > /tmp/kana-p-$USER-xdg_menu.lua
-	awesome -c /usr/share/kana-p/awesome/main.lua &
-	pid=$!
-else
-	pid="$WM_PID"
+	bash << STOP &
+	while true
+	do
+		awesome -c /usr/share/kana-p/awesome/main.lua
+		openbox
+	done
+STOP
+	trap "kill $bash_pid" EXIT
 fi
 
 sleep 0.5
 
 dex -a -e Awesome
 
-wait $pid
+wait $service_pid

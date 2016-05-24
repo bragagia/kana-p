@@ -60,6 +60,7 @@ terminal = "urxvt"
 explorer_cmd = "xdg-open " .. os.getenv("HOME")
 lock_cmd = 'i3lock-wrapper -e'
 launcher = 'rofi -font "ohsnap 14" -show run'
+close_session = 'killall devmon'
 
 -- Menu
 
@@ -74,7 +75,7 @@ end
 
 local kanapmenu = {
 	{ "lock", lock_cmd },
-	{ "close session", awesome.quit },
+	{ "close session", close_session },
 	{ "halt", "systemctl poweroff" },
 	{ "reboot", "systemctl reboot" }
 }
