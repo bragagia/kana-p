@@ -53,10 +53,11 @@ if [ -z "$NO_WM" ]; then
 	while true
 	do
 		awesome -c /usr/share/kana-p/awesome/main.lua
-		openbox
+		openbox --sm-disable
 	done
 STOP
-	trap "kill $bash_pid" EXIT
+	bash_pid=$!
+	trap "kill -9 $bash_pid" EXIT
 fi
 
 sleep 0.5
