@@ -25,7 +25,7 @@ awful.key({ modkey            }, "u", awful.client.urgent.jumpto),
 awful.key({ modkey            }, "Return", function () awful.util.spawn(terminal) end),
 awful.key({ modkey            }, "e", function () awful.util.spawn(explorer_cmd) end),
 awful.key({ modkey            }, "l", function () os.execute(lock_cmd) end),
-awful.key({ modkey, "Shift"   }, "r", function () awful.util.spawn('gksudo ' .. launcher) end),
+awful.key({ modkey, "Control" }, "r", function () awful.util.spawn('gksudo ' .. launcher) end),
 awful.key({ modkey            }, "r", function () awful.util.spawn(launcher) end),
 
 -- Music
