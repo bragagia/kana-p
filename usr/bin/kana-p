@@ -39,6 +39,10 @@ compton -fcCz -r 8 -o 1.0 -l -9 -t -9 -I 0.08 -O 0.08 -D 20 --opacity-rule '92:c
 #xss-lock i3lock-wrapper -e &
 #trap "killall xss-lock" EXIT
 
+### Tray
+
+volumeicon &
+
 ### User scripts
 
 if [ -f "$HOME""/.kana-p-startup" ]; then
