@@ -82,7 +82,7 @@ URxvt*cursorColor2: #151515
 ! URxvt*fadeColor: colour
 
 ! Set the application icon pixmap; option -icon.
-! URxvt*iconFile: file
+URxvt*iconFile: /usr/share/icons/Numix-Bevel/48x48/apps/terminal.svg
 
 ! Use the specified colour for the scrollbar [default #B2B2B2].
 ! URxvt*scrollColor: colour
