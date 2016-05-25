@@ -57,7 +57,11 @@ if [ -z "$NO_WM" ]; then
 	while true
 	do
 		awesome -c /usr/share/kana-p/awesome/main.lua
+		tint 2 &
+		tint_pid=$!
 		openbox --sm-disable
+		kill $tint_pid
+		echo $tint_pid > /tmp/penisenorme
 	done
 STOP
 	bash_pid=$!
