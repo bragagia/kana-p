@@ -1,0 +1,10 @@
+#!/bin/sh
+
+# Awesome
+awesome -c /usr/share/kana-p/awesome/main.lua
+
+# OpenBox
+tint2 &
+tint_pid=$!
+openbox --sm-disable
+kill $tint_pid
