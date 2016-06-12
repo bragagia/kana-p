@@ -546,7 +546,11 @@ client.connect_signal("manage", function (c, startup)
 
 		-- Widgets that are aligned to the left
 		local left_layout = wibox.layout.fixed.horizontal()
-		-- left_layout:add(awful.titlebar.widget.iconwidget(c))
+		local icon_widget = awful.titlebar.widget.iconwidget(c)
+		local spacer = wibox.widget.textbox(" ")
+		left_layout:add(spacer)
+		left_layout:add(icon_widget)
+		left_layout:add(spacer)
 		left_layout:buttons(buttons)
 
 		-- Widgets that are aligned to the right
