@@ -36,18 +36,6 @@ awful.key({ modkey            }, "p", function () os.execute("mpc toggle") end),
 -- Special keys
 awful.key({                   }, "XF86MonBrightnessUp", function () os.execute("light -A 5") end),
 awful.key({                   }, "XF86MonBrightnessDown", function () os.execute("light -U 5") end),
-awful.key({                   }, "XF86AudioLowerVolume", function ()
-	os.execute("pulseaudio-ctl down 3")
-	volumewidget.update()
-end),
-awful.key({                   }, "XF86AudioRaiseVolume", function ()
-	os.execute("pulseaudio-ctl up 3")
-	volumewidget.update()
-end),
-awful.key({                   }, "XF86AudioMute", function ()
-	os.execute("pulseaudio-ctl mute")
-	volumewidget.update()
-end),
 awful.key({                   }, "XF86Sleep", function () os.execute("systemctl suspend") end),
 awful.key({                   }, "XF86Display", function () os.execute("kana-p-screen") end),
 awful.key({                   }, "Print", function () os.execute("scrot -e 'mv $f ~/Images/shots/'") end),

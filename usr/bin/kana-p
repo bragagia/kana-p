@@ -24,6 +24,10 @@ fi
 xsettingsd -c "$HOME""/.xsettingsd" &
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 
+if [ ! -f "$XDG_CONFIG_HOME""/volumeicon/kana-p" ]; then
+	cp /usr/share/kana-p/volumeicon "$XDG_CONFIG_HOME""/volumeicon/kana-p"
+fi
+
 ### Drivers
 
 kana-p-screen
@@ -44,7 +48,7 @@ compton -fcCz -r 8 -o 1.0 -l -9 -t -9 -I 0.08 -O 0.08 -D 20 --opacity-rule '92:c
 
 ### Tray
 
-volumeicon &
+volumeicon -c kana-p &
 
 ### User scripts
 
