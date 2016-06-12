@@ -28,12 +28,12 @@ theme.layout_floating               = theme.confdir .. "/icons/floating.png"
 theme.fg_normal = "#898f9a"
 theme.fg_focus  = "#ffffff"
 theme.fg_urgent = "#d01e2d"
-theme.bg_normal = "#101010A0"
-theme.bg_focus  = "#10101000"
-theme.bg_urgent = "#10101000"
+theme.bg_normal = "#2F343F"
+theme.bg_focus  = "#2F343F"
+theme.bg_urgent = "#2F343F"
 -- }}}
 
-theme.bg_systray = "#505050"
+theme.bg_systray = "#2F343F"
 
 theme.notif_fg = "#000000"
 theme.notif_bg = "#91EBE9"
