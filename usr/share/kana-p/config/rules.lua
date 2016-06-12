@@ -43,5 +43,10 @@ awful.rules.rules = {
 			maximized_horizontal = true,
 			focus = yes
 		}
+	},
+	{
+		rule = {
+			class = "Plank"
+		}
 	}
 }
