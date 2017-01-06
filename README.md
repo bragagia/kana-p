@@ -20,11 +20,13 @@ Kana-p is a package which install and configure quickly everything you need on y
 - Awesome WM as desktop manager (tilling)
 - LightDM as login manager
 - Compton as compositor
+- URxvt as terminal
 - Wi-Fi and Bluetooth working
 - USB mount-on-connect
 - Automatic screen managing, just connect them
 - All great fonts installed
 - All this comes with beautiful themes and complete configuration
+- No preinstalled desktop app
 
 ![Kana-p demo](http://i.imgur.com/ScrXe7A.png)
 
@@ -36,7 +38,7 @@ Feel free to fork and publish your own version of this package and/or send a pul
 
 I recommend to install this package from a fresh install but this is not mandatory.
 
-Just follow the [Installation guide](https://wiki.archlinux.org/index.php/Installation_guide) and start from that.
+Just follow the [Installation Guide](https://wiki.archlinux.org/index.php/Installation_guide) and start from that.
 
 ### With an AUR-helper
 
@@ -58,6 +60,7 @@ Once you get on your newly installed desktop :
 - Start a terminal : Win + Enter
 - Switch of desktop : Win + Right or Left arrow
 - Close a window : Win + C
+- Lock : Win + L
 
 The top bar show a lot of thing, let's see that.
 
@@ -65,9 +68,9 @@ You can click on the top-left icon to show a menu with all applications and a qu
 
 You can show the tray by clicking on the tiny **<** at right.
 
-Digits at left are all your differents desktop.
+Digits at the left are all your differents desktop.
 
-Letters at right show some informations of your computer :
+Letters at the right show some informations of your computer :
 - w => wifi, in percentage
 - d => Download rate, in megabytes per second
 - u => Upload rate, in megabytes per second
