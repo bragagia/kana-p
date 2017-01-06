@@ -2,7 +2,7 @@
 pkgname=kana-p-git
 pkgver=r106.2687096
 pkgrel=1
-pkgdesc="Lite desktop manager - use lightdm, awesome and compton"
+pkgdesc="Lite Archlinux complete desktop"
 arch=('any')
 url="https://github.com/bragagia/kana-p"
 license=('GPL')
