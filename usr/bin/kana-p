@@ -51,7 +51,6 @@ compton -fcCz -r 8 -o 1.0 -l -9 -t -9 -I 0.08 -O 0.08 -D 20 --opacity-rule '92:c
 ### Tray
 
 volumeicon -c kana-p &
-blueberry-tray &
 
 ### User scripts
 
