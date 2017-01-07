@@ -311,7 +311,7 @@ rofi.lines:                          15
 ! Number of columns
 rofi.columns:                        1
 ! Font to use
-rofi.font:                           ohsnap 14
+rofi.font:                           misc ohsnap 14
 ! Color scheme for normal row
 rofi.color-normal:                   #00273238, #c1c1c1, #00273238, #394249, #ffffff
 ! Color scheme for urgent row
