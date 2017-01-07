@@ -40,11 +40,18 @@ I recommend to install this package from a fresh install but this is not mandato
 
 Just follow the [Installation Guide](https://wiki.archlinux.org/index.php/Installation_guide) and start from that.
 
+Activate the multilib repository by uncommenting the appropriate lines in `/etc/pacman.conf`.
+
+```
+[multilib]
+Include = /etc/pacman.d/mirrorlist
+```
+
+Remember to sync with `pacman -Sy`.
+
 ### With an AUR-helper
 
-Simply install the **kana-p-git** package on the AUR.
-
-Reboot and enjoy.
+Simply install the **kana-p-git** package on the AUR. Reboot and enjoy.
 
 ### Without AUR-helper
 
@@ -66,7 +73,7 @@ The top bar show a lot of thing, let's see that.
 
 You can click on the top-left icon to show a menu with all applications and a quick way to shutdown your computer.
 
-You can show the tray by clicking on the tiny **<** at right.
+You can show the tray by clicking on the tiny `<` at right.
 
 Digits at the left are all your differents desktop.
 
