@@ -3,7 +3,7 @@ theme = {}
 -- }}}
 
 -- {{{ Styles
-theme.font      = "Ohsnap 8"
+theme.font      = "Misc Ohsnap 8"
 
 theme.confdir                       = "/usr/share/kana-p/awesome"
 
