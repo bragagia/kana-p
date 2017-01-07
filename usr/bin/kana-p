@@ -62,7 +62,7 @@ fi
 
 if [ -z "$NO_WM" ]; then
 	xdg_menu --format awesome --root-menu /etc/xdg/menus/arch-applications.menu > /tmp/kana-p-$USER-xdg_menu.lua
-	awesome -c /usr/share/kana-p/awesome/main.lua
+	awesome -c /usr/share/kana-p/awesome/main.lua &
 	awes_pid=$!
 	trap "kill -9 $awes_pid" EXIT
 fi
