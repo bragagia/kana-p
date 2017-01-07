@@ -63,6 +63,7 @@ elif [[ $mode == "install" ]]; then
 	# Services
 	systemctl enable lightdm.service > /dev/null
 	systemctl enable NetworkManager.service > /dev/null
+	systemctl enable bluetooth.service > /dev/null
   
 	# Drivers
 	modprobe btusb
@@ -81,6 +82,7 @@ elif [[ $mode == "uninstall" ]]; then
 	# Services
 	systemctl disable lightdm.service > /dev/null
 	systemctl disable NetworkManager.service > /dev/null
+	systemctl disable bluetooth.service > /dev/null
 
 	# LightDM
 	sed -i 's#^background=/usr/share/kana-p/login-wallpaper.jpg$#background=#g' /etc/lightdm/lightdm-webkit-greeter.conf

@@ -39,6 +39,13 @@ trap "killall devmon" EXIT
 
 eval "$(ssh-agent -s)"
 
+if [ ! -f "$XDG_CONFIG_HOME"/pulse/default.pa ]; then
+	cat > "$XDG_CONFIG_HOME"/pulse/default.pa << STOP
+.include /etc/pulse/default.pa
+load-module module-switch-on-connect
+STOP
+fi
+
 ### Composition manager
 
 compton -fcCz -r 8 -o 1.0 -l -9 -t -9 -I 0.08 -O 0.08 -D 20 --opacity-rule '92:class_g *?= "URxvt" && focused' --opacity-rule '65:class_g *?= "URxvt" && !focused' --blur-background --blur-kern 7x7box --blur-background-exclude '!class_g *?= "URxvt"' -b

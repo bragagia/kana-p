@@ -96,6 +96,7 @@ depends=(
 	'alsa-plugins'
 	'pulseaudio'
 	'pulseaudio-alsa'
+	'pulseaudio-bluetooth'
 	'bluez'
 	'bluez-utils'
 	'udevil'
