@@ -304,8 +304,6 @@ URxvt*saveLines: 65535
 
 ! Enabled modi
 rofi.modi:                           window,run,ssh
-! Window opacity
-rofi.opacity:                        80
 ! Window width
 rofi.width:                          50
 ! Number of lines
@@ -315,13 +313,13 @@ rofi.columns:                        1
 ! Font to use
 rofi.font:                           ohsnap 14
 ! Color scheme for normal row
-rofi.color-normal:                   #273238, #c1c1c1, #273238, #394249, #ffffff
+rofi.color-normal:                   #00273238, #c1c1c1, #00273238, #394249, #ffffff
 ! Color scheme for urgent row
-rofi.color-urgent:                   #273238, #ff1844, #273238, #394249, #ff1844
+rofi.color-urgent:                   #00273238, #ff1844, #00273238, #394249, #ff1844
 ! Color scheme for active row
-rofi.color-active:                   #273238, #80cbc4, #273238, #394249, #80cbc4
+rofi.color-active:                   #00273238, #80cbc4, #00273238, #394249, #80cbc4
 ! Color scheme window
-rofi.color-window:                   #273238, #273238, #1e2529
+rofi.color-window:                   #CC273238, #CC273238, #1e2529
 ! Border width
 rofi.bw:                             1
 ! Location on screen
