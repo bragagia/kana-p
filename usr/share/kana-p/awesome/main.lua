@@ -111,14 +111,9 @@ local kanapmenu = {
   { "reboot", "systemctl reboot" }
 }
 
-local markup    = lain.util.markup
+local xdg_menu      = dofile("/tmp/kana-p-" .. os.getenv("USER") .. "-xdg_menu.lua");
 
---mymainmenu = awful.menu({ items = TableConcat(xdgmenu, kanapmenu) })
-mymainmenu = awful.menu({ items = kanapmenu })
-
-mylauncher = wibox.widget.textbox("")
-mylauncher:set_markup(markup(beautiful.info_spacer, " v "))
-mylauncher:buttons(awful.util.table.join( awful.button({ }, 1, function () mymainmenu:toggle() end )))
+mymainmenu = awful.menu({ items = awful.util.table.join(xdgmenu, kanapmenu) })
 
 -- Menubar configuration
 menubar.utils.terminal = terminal -- Set the terminal for applications that require it
@@ -129,11 +124,17 @@ mykeyboardlayout = awful.widget.keyboardlayout()
 
 -- {{{ Wibar
 
+local markup    = lain.util.markup
+
 -- Spacers
 local spacer = wibox.widget.textbox(" ")
 
 widget_spacer = wibox.widget.textbox("%")
 widget_spacer:set_markup(markup(beautiful.info_spacer, " | "))
+
+mylauncher = wibox.widget.textbox("")
+mylauncher:set_markup(markup(beautiful.info_spacer, " v "))
+mylauncher:buttons(awful.util.table.join( awful.button({ }, 1, function () mymainmenu:toggle() end )))
 
 -- Clock
 mytextclock = awful.widget.textclock(markup(beautiful.info_value, "%d %B ") .. markup(beautiful.info_spacer, ">") .. markup(beautiful.info_value, " %H:%M "))
@@ -254,6 +255,30 @@ end
 -- Re-set wallpaper when a screen's geometry changes (e.g. different resolution)
 screen.connect_signal("property::geometry", set_wallpaper)
 
+function togglewibox()
+    if mouse.screen.mywibox.forcevisible then
+        mouse.screen.mywibox.visible = false
+        mouse.screen.mywibox.forcevisible = false
+    else
+        mouse.screen.mywibox.visible = true
+        mouse.screen.mywibox.forcevisible = true
+    end
+end
+
+function hideallwibox()
+    for s in screen do
+        if s.mywibox.forcevisible == false then
+            s.mywibox.visible = false
+        end
+    end
+end
+
+function showallwibox()
+    for s in screen do
+        s.mywibox.visible = true
+    end
+end
+
 awful.screen.connect_for_each_screen(function(s)
     -- Wallpaper
     set_wallpaper(s)
@@ -312,6 +337,7 @@ awful.screen.connect_for_each_screen(function(s)
 
     -- Create the wibox
     s.mywibox = awful.wibar({ position = "top", screen = s })
+    s.mywibox.forcevisible = true
 
     -- Add widgets to the wibox
     s.mywibox:setup {
@@ -339,9 +365,9 @@ awful.screen.connect_for_each_screen(function(s)
             widget_spacer,
             netdownwidget,
             widget_spacer,
-            cpuwidget,
-            widget_spacer,
             memwidget,
+            widget_spacer,
+            cpuwidget,
             widget_spacer,
             batwidget,
             widget_spacer,
@@ -369,8 +395,9 @@ globalkeys = awful.util.table.join(
               {description = "reload awesome", group = "awesome"}),
     awful.key({ modkey, "Control" }, "q", awesome.quit,
               {description = "quit awesome", group = "awesome"}),
-    awful.key({ modkey            }, "l", function () os.execute(lock_cmd) end,
+    awful.key({ modkey            }, "q", function () os.execute(lock_cmd) end,
               {description = "lock screen", group = "awesome"}),
+awful.key({ modkey            }, "d", togglewibox),
 
     -- Tag
     awful.key({ modkey,           }, "Left",   awful.tag.viewprev,
@@ -581,7 +608,7 @@ awful.rules.rules = {
                 "Wpa_gui",
                 "pinentry",
                 "veromix",
-                "xtightvncviewer"
+                "xtightvncviewer",
             },
             name = {
                 "Event Tester",  -- xev.
@@ -591,7 +618,7 @@ awful.rules.rules = {
             }
         },
         properties = {
-            floating = true
+            floating = true,
         }
     },
 
@@ -600,11 +627,11 @@ awful.rules.rules = {
         rule_any = {
             type = {
                 "normal",
-                "dialog"
+                "dialog",
             }
         },
         properties = {
-            titlebars_enabled = true
+            titlebars_enabled = true,
         }
     },
 
@@ -613,24 +640,21 @@ awful.rules.rules = {
             class = {
                 "Vlc"
             },
-            name = {
-                "Netflix"
-            }
         },
         properties = {
             sticky = true,
-            titlebars_enabled = false
+            titlebars_enabled = false,
         }
     },
     {
         rule_any = {
             class = {
                 "URxvt",
-                "XTerm"
+                "XTerm",
             }
         },
         properties = {
-            size_hints_honor = false
+            size_hints_honor = false,
         }
     },
     {
@@ -703,10 +727,11 @@ client.connect_signal("request::titlebars", function(c)
         },
         { -- Right
             --awful.titlebar.widget.floatingbutton (c),
-            --awful.titlebar.widget.maximizedbutton(c),
             --awful.titlebar.widget.stickybutton   (c),
             --awful.titlebar.widget.ontopbutton    (c),
-            awful.titlebar.widget.closebutton    (c),
+            wibox.container.margin(awful.titlebar.widget.minimizebutton (c), 2, 3, 3, 2),
+            wibox.container.margin(awful.titlebar.widget.maximizedbutton(c), 2, 3, 3, 2),
+            wibox.container.margin(awful.titlebar.widget.closebutton(c), 2, 3, 3, 2),
             layout = wibox.layout.fixed.horizontal()
         },
         layout = wibox.layout.align.horizontal
