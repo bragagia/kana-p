@@ -48,7 +48,7 @@ fi
 
 ### Composition manager
 
-compton -fcCz -r 8 -o 1.0 -l -9 -t -9 -I 0.08 -O 0.08 -D 20 --opacity-rule '92:class_g *?= "URxvt" && focused' --opacity-rule '65:class_g *?= "URxvt" && !focused' --blur-background --blur-kern 7x7box --blur-background-exclude '!class_g *?= "URxvt"' &
+compton -fcCz -r 9 -o 0.8 -l -13 -t 0 -I 0.08 -O 0.08 -D 20 --opacity-rule '92:class_g *?= "URxvt" && focused' --opacity-rule '65:class_g *?= "URxvt" && !focused' --blur-background --blur-kern 7x7box --blur-background-exclude '!class_g *?= "URxvt"' &
 
 ### Lock
 
