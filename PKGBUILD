@@ -143,7 +143,7 @@ depends=(
 	'i3lock-wrapper'
 
 	'compton'
-	'awesome'
+	'awesome-git'
 	'lain-git'
 	'eminent-git'
 	'rofi'
