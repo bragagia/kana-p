@@ -67,13 +67,13 @@ Once you get on your newly installed desktop :
 - Start a terminal : Win + Enter
 - Switch of desktop : Win + Right or Left arrow
 - Close a window : Win + C
-- Lock : Win + L
+- Lock : Win + Q
+- See keybindings cheatsheet : Win + S
 
-The top bar show a lot of thing, let's see that.
+#### Top bar
+Click on the top-left icon to show a menu with all applications and a quick way to shutdown your computer.
 
-You can click on the top-left icon to show a menu with all applications and a quick way to shutdown your computer.
-
-You can show the tray by clicking on the tiny `<` at right.
+Show the systray by clicking on the tiny `<` at right.
 
 Digits at the left are all your differents desktop.
 
@@ -84,3 +84,21 @@ Letters at the right show some informations of your computer :
 - v => Volume, in percentage
 - r => RAM used, in megabytes
 - c => CPU used, in percentage
+
+### Set a wallpaper
+
+Use feh in command-line to set custom wallpaper.
+
+Example :
+
+```bash
+feh --bg-fill something.png
+```
+
+It support multiple files for multiple screens
+
+### Launch something at startup
+
+Put your shell-script in `~/.kana-p-startup`.
+
+It will be executed before awesome start.

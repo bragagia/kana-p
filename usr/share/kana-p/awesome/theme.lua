@@ -7,8 +7,8 @@ theme.font      = "Misc Ohsnap 8"
 
 theme.confdir                       = "/usr/share/kana-p/awesome"
 
---theme.taglist_squares_sel           = theme.confdir .. "/icons/square_a.png"
---theme.taglist_squares_unsel         = theme.confdir .. "/icons/square_b.png"
+theme.taglist_squares_sel           = theme.confdir .. "/taglist/square.png"
+theme.taglist_squares_unsel         = theme.confdir .. "/taglist/square.png"
 
 theme.layout_tile                   = theme.confdir .. "/icons/tile.png"
 theme.layout_tilegaps               = theme.confdir .. "/icons/tilegaps.png"
@@ -102,28 +102,36 @@ theme.mouse_finder_animate_timeout = 4
 -- }}}
 
 -- Define the image to load
-theme.titlebar_close_button_normal = "/usr/share/kana-p/awesome/titlebar/close.png"
-theme.titlebar_close_button_focus  = "/usr/share/kana-p/awesome/titlebar/close.png"
+theme.titlebar_close_button_normal = "/usr/share/kana-p/awesome/titlebar/close-normal.png"
+theme.titlebar_close_button_focus  = "/usr/share/kana-p/awesome/titlebar/close-focus.png"
 
-theme.titlebar_ontop_button_normal_inactive = "/usr/share/awesome/themes/default/titlebar/ontop_normal_inactive.png"
-theme.titlebar_ontop_button_focus_inactive  = "/usr/share/awesome/themes/default/titlebar/ontop_focus_inactive.png"
-theme.titlebar_ontop_button_normal_active = "/usr/share/awesome/themes/default/titlebar/ontop_normal_active.png"
-theme.titlebar_ontop_button_focus_active  = "/usr/share/awesome/themes/default/titlebar/ontop_focus_active.png"
+theme.titlebar_minimize_button_normal = "/usr/share/kana-p/awesome/titlebar/minimize.png"
+theme.titlebar_minimize_button_focus  = "/usr/share/kana-p/awesome/titlebar/minimize.png"
 
-theme.titlebar_sticky_button_normal_inactive = "/usr/share/awesome/themes/default/titlebar/sticky_normal_inactive.png"
-theme.titlebar_sticky_button_focus_inactive  = "/usr/share/awesome/themes/default/titlebar/sticky_focus_inactive.png"
-theme.titlebar_sticky_button_normal_active = "/usr/share/awesome/themes/default/titlebar/sticky_normal_active.png"
-theme.titlebar_sticky_button_focus_active  = "/usr/share/awesome/themes/default/titlebar/sticky_focus_active.png"
+theme.titlebar_maximized_button_normal_inactive = "/usr/share/kana-p/awesome/titlebar/maximized.png"
+theme.titlebar_maximized_button_normal_active = "/usr/share/kana-p/awesome/titlebar/maximized-active.png"
+theme.titlebar_maximized_button_focus_inactive = "/usr/share/kana-p/awesome/titlebar/maximized.png"
+theme.titlebar_maximized_button_focus_active = "/usr/share/kana-p/awesome/titlebar/maximized-active.png"
 
-theme.titlebar_floating_button_normal_inactive = "/usr/share/awesome/themes/default/titlebar/floating_normal_inactive.png"
-theme.titlebar_floating_button_focus_inactive  = "/usr/share/awesome/themes/default/titlebar/floating_focus_inactive.png"
-theme.titlebar_floating_button_normal_active = "/usr/share/awesome/themes/default/titlebar/floating_normal_active.png"
-theme.titlebar_floating_button_focus_active  = "/usr/share/awesome/themes/default/titlebar/floating_focus_active.png"
+--theme.titlebar_ontop_button_normal_inactive = "/usr/share/awesome/themes/default/titlebar/ontop_normal_inactive.png"
+--theme.titlebar_ontop_button_focus_inactive  = "/usr/share/awesome/themes/default/titlebar/ontop_focus_inactive.png"
+--theme.titlebar_ontop_button_normal_active = "/usr/share/awesome/themes/default/titlebar/ontop_normal_active.png"
+--theme.titlebar_ontop_button_focus_active  = "/usr/share/awesome/themes/default/titlebar/ontop_focus_active.png"
 
-theme.titlebar_maximized_button_normal_inactive = "/usr/share/awesome/themes/default/titlebar/maximized_normal_inactive.png"
-theme.titlebar_maximized_button_focus_inactive  = "/usr/share/awesome/themes/default/titlebar/maximized_focus_inactive.png"
-theme.titlebar_maximized_button_normal_active = "/usr/share/awesome/themes/default/titlebar/maximized_normal_active.png"
-theme.titlebar_maximized_button_focus_active  = "/usr/share/awesome/themes/default/titlebar/maximized_focus_active.png"
+--theme.titlebar_sticky_button_normal_inactive = "/usr/share/awesome/themes/default/titlebar/sticky_normal_inactive.png"
+--theme.titlebar_sticky_button_focus_inactive  = "/usr/share/awesome/themes/default/titlebar/sticky_focus_inactive.png"
+--theme.titlebar_sticky_button_normal_active = "/usr/share/awesome/themes/default/titlebar/sticky_normal_active.png"
+--theme.titlebar_sticky_button_focus_active  = "/usr/share/awesome/themes/default/titlebar/sticky_focus_active.png"
+
+--theme.titlebar_floating_button_normal_inactive = "/usr/share/awesome/themes/default/titlebar/floating_normal_inactive.png"
+--theme.titlebar_floating_button_focus_inactive  = "/usr/share/awesome/themes/default/titlebar/floating_focus_inactive.png"
+--theme.titlebar_floating_button_normal_active = "/usr/share/awesome/themes/default/titlebar/floating_normal_active.png"
+--theme.titlebar_floating_button_focus_active  = "/usr/share/awesome/themes/default/titlebar/floating_focus_active.png"
+
+--theme.titlebar_maximized_button_normal_inactive = "/usr/share/awesome/themes/default/titlebar/maximized_normal_inactive.png"
+--theme.titlebar_maximized_button_focus_inactive  = "/usr/share/awesome/themes/default/titlebar/maximized_focus_inactive.png"
+--theme.titlebar_maximized_button_normal_active = "/usr/share/awesome/themes/default/titlebar/maximized_normal_active.png"
+--theme.titlebar_maximized_button_focus_active  = "/usr/share/awesome/themes/default/titlebar/maximized_focus_active.png"
 
 -- {{{ Misc
 theme.tasklist_floating_icon = "/usr/share/awesome/themes/default/tasklist/floatingw.png"

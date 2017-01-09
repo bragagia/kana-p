@@ -143,7 +143,7 @@ depends=(
 	'i3lock-wrapper'
 
 	'compton'
-	'awesome'
+	'awesome-git'
 	'lain-git'
 	'eminent-git'
 	'rofi'
@@ -174,8 +174,14 @@ depends=(
 )
 makedepends=('git')
 optdepends=()
-provides=('kana-p')
-conflicts=('kana-p')
+provides=(
+	'kana-p'
+	'autohidewibox'
+)
+conflicts=(
+	'kana-p'
+	'autohidewibox'
+)
 replaces=()
 backup=()
 options=()

@@ -76,6 +76,8 @@ fi
 
 sleep 0.5
 
+autohidewibox.py &
+
 dex -a -e Awesome
 
 wait $service_pid
