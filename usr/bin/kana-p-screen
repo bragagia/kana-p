@@ -80,15 +80,12 @@ eval $CMD
 
 rm -f $SCREENS_ORDERED_FILE
 
-if [ "$1" == "-d" ]
-then
-		feh --bg-fill '/usr/share/backgrounds/login.jpg'
-else
+if [ ! "$1" == "-d" ]
 	if [ -a "$HOME/.fehbg" ]
 	then
 		$HOME/.fehbg
 	else
-		feh --bg-fill '/usr/share/kana-p/wallpaper.jpg'
+		feh --bg-fill '/usr/lib/kana-p/images/wallpaper.jpg'
 	fi
 fi
 

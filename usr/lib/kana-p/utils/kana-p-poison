@@ -69,7 +69,7 @@ elif [[ $mode == "install" ]]; then
 	modprobe btusb
 
 	# LightDM
-	sed -i "s#^background=.*\$#background=/usr/lib/kana-p/images/login-wallpaper.jpg#g" /etc/lightdm/lightdm-webkit-greeter.conf
+	sed -i "s#^background=.*\$#background=/usr/share/backgrounds/login.jpg#g" /etc/lightdm/lightdm-webkit-greeter.conf
 	sed -i "s#^\#greeter-session=.*\$#greeter-session=lightdm-webkit-greeter#g" /etc/lightdm/lightdm.conf
 	sed -i "s#^\#display-setup-script=.*\$#display-setup-script=/usr/bin/kana-p-screen -d#g" /etc/lightdm/lightdm.conf
 	sed -i "s#^webkit-theme=.*\$#webkit-theme=Bevel#g" /etc/lightdm/lightdm-webkit-greeter.conf
@@ -85,7 +85,7 @@ elif [[ $mode == "uninstall" ]]; then
 	systemctl disable bluetooth.service > /dev/null
 
 	# LightDM
-	sed -i 's#^background=/usr/lib/kana-p/images/login-wallpaper.jpg$#background=#g' /etc/lightdm/lightdm-webkit-greeter.conf
+	sed -i 's#^background=/usr/share/backgrounds/login.jpg$#background=#g' /etc/lightdm/lightdm-webkit-greeter.conf
 	sed -i "s#^greeter-session=lightdm-webkit-greeter\$#\#greeter-session=#g" /etc/lightdm/lightdm.conf
 	sed -i "s#display-setup-script=/usr/bin/kana-p-screen -d#\#display-setup-script=#g" /etc/lightdm/lightdm.conf
 	sed -i "s#^webkit-theme=Bevel\$#webkit-theme=webkit#g" /etc/lightdm/lightdm-webkit-greeter.conf
