@@ -99,7 +99,7 @@ end
 local kanapmenu = {
   { "lock", lock_cmd },
   { "close session", close_session },
-  { "suspend", " systemctl suspend" },
+  { "suspend", "systemctl suspend" },
   { "halt", "systemctl poweroff" },
   { "reboot", "systemctl reboot" }
 }
