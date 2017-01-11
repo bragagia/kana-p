@@ -5,24 +5,24 @@ theme = {}
 -- {{{ Styles
 theme.font      = "Misc Ohsnap 8"
 
-theme.confdir                       = "/usr/share/kana-p/awesome"
+theme.confdir                       = "/usr/lib/kana-p/awesome/images"
 
 theme.taglist_squares_sel           = theme.confdir .. "/taglist/square.png"
 theme.taglist_squares_unsel         = theme.confdir .. "/taglist/square.png"
 
-theme.layout_tile                   = theme.confdir .. "/icons/tile.png"
-theme.layout_tilegaps               = theme.confdir .. "/icons/tilegaps.png"
-theme.layout_tileleft               = theme.confdir .. "/icons/tileleft.png"
-theme.layout_tilebottom             = theme.confdir .. "/icons/tilebottom.png"
-theme.layout_tiletop                = theme.confdir .. "/icons/tiletop.png"
-theme.layout_fairv                  = theme.confdir .. "/icons/fairv.png"
-theme.layout_fairh                  = theme.confdir .. "/icons/fairh.png"
-theme.layout_spiral                 = theme.confdir .. "/icons/spiral.png"
-theme.layout_dwindle                = theme.confdir .. "/icons/dwindle.png"
-theme.layout_max                    = theme.confdir .. "/icons/max.png"
-theme.layout_fullscreen             = theme.confdir .. "/icons/fullscreen.png"
-theme.layout_magnifier              = theme.confdir .. "/icons/magnifier.png"
-theme.layout_floating               = theme.confdir .. "/icons/floating.png"
+--theme.layout_tile                   = theme.confdir .. "/icons/tile.png"
+--theme.layout_tilegaps               = theme.confdir .. "/icons/tilegaps.png"
+--theme.layout_tileleft               = theme.confdir .. "/icons/tileleft.png"
+--theme.layout_tilebottom             = theme.confdir .. "/icons/tilebottom.png"
+--theme.layout_tiletop                = theme.confdir .. "/icons/tiletop.png"
+--theme.layout_fairv                  = theme.confdir .. "/icons/fairv.png"
+--theme.layout_fairh                  = theme.confdir .. "/icons/fairh.png"
+--theme.layout_spiral                 = theme.confdir .. "/icons/spiral.png"
+--theme.layout_dwindle                = theme.confdir .. "/icons/dwindle.png"
+--theme.layout_max                    = theme.confdir .. "/icons/max.png"
+--theme.layout_fullscreen             = theme.confdir .. "/icons/fullscreen.png"
+--theme.layout_magnifier              = theme.confdir .. "/icons/magnifier.png"
+--theme.layout_floating               = theme.confdir .. "/icons/floating.png"
 
 -- {{{ Colors
 theme.fg_normal = "#898f9a"
@@ -102,16 +102,16 @@ theme.mouse_finder_animate_timeout = 4
 -- }}}
 
 -- Define the image to load
-theme.titlebar_close_button_normal = "/usr/share/kana-p/awesome/titlebar/close-normal.png"
-theme.titlebar_close_button_focus  = "/usr/share/kana-p/awesome/titlebar/close-focus.png"
+theme.titlebar_close_button_normal = theme.confdir .. "/titlebar/close-normal.png"
+theme.titlebar_close_button_focus  = theme.confdir .. "/titlebar/close-focus.png"
 
-theme.titlebar_minimize_button_normal = "/usr/share/kana-p/awesome/titlebar/minimize.png"
-theme.titlebar_minimize_button_focus  = "/usr/share/kana-p/awesome/titlebar/minimize.png"
+theme.titlebar_minimize_button_normal = theme.confdir .. "/titlebar/minimize.png"
+theme.titlebar_minimize_button_focus  = theme.confdir .. "/titlebar/minimize.png"
 
-theme.titlebar_maximized_button_normal_inactive = "/usr/share/kana-p/awesome/titlebar/maximized.png"
-theme.titlebar_maximized_button_normal_active = "/usr/share/kana-p/awesome/titlebar/maximized-active.png"
-theme.titlebar_maximized_button_focus_inactive = "/usr/share/kana-p/awesome/titlebar/maximized.png"
-theme.titlebar_maximized_button_focus_active = "/usr/share/kana-p/awesome/titlebar/maximized-active.png"
+theme.titlebar_maximized_button_normal_inactive = theme.confdir .. "/titlebar/maximized.png"
+theme.titlebar_maximized_button_normal_active = theme.confdir .. "/titlebar/maximized-active.png"
+theme.titlebar_maximized_button_focus_inactive = theme.confdir .. "/titlebar/maximized.png"
+theme.titlebar_maximized_button_focus_active = theme.confdir .. "/titlebar/maximized-active.png"
 
 --theme.titlebar_ontop_button_normal_inactive = "/usr/share/awesome/themes/default/titlebar/ontop_normal_inactive.png"
 --theme.titlebar_ontop_button_focus_inactive  = "/usr/share/awesome/themes/default/titlebar/ontop_focus_inactive.png"
@@ -134,7 +134,7 @@ theme.titlebar_maximized_button_focus_active = "/usr/share/kana-p/awesome/titleb
 --theme.titlebar_maximized_button_focus_active  = "/usr/share/awesome/themes/default/titlebar/maximized_focus_active.png"
 
 -- {{{ Misc
-theme.tasklist_floating_icon = "/usr/share/awesome/themes/default/tasklist/floatingw.png"
+--theme.tasklist_floating_icon = "/usr/share/awesome/themes/default/tasklist/floatingw.png"
 -- }}}
 
 return theme

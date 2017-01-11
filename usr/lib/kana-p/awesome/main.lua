@@ -48,13 +48,13 @@ local function doconf(name)
   if file_exists(final_name) then
     dofile(final_name)
   else
-    dofile("/usr/share/kana-p/config/" .. name)
+    dofile("/usr/lib/kana-p/awesome/config/" .. name)
   end
 end
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
-beautiful.init("/usr/share/kana-p/awesome/theme.lua")
+beautiful.init("/usr/lib/kana-p/awesome/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
 terminal = "kana-p-term"
