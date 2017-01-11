@@ -10,6 +10,9 @@
   - [Without AUR-helper](#without-aur-helper)
 - [User Guide](#user-guide)
   - [Quick start](#quick-start)
+    - [Top bar](#top-bar)
+  - [Set a wallpaper](#set-a-wallpaper)
+  - [Launch something at startup](#launch-something-at-startup)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
