@@ -80,7 +80,7 @@ eval $CMD
 
 rm -f $SCREENS_ORDERED_FILE
 
-if [ ! "$1" == "-d" ]
+if [ ! "$1" == "-d" ]; then
 	if [ -a "$HOME/.fehbg" ]
 	then
 		$HOME/.fehbg
