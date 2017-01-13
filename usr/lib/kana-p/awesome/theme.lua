@@ -57,6 +57,7 @@ theme.info_value = "#dadada"
 theme.border_width  = "0"
 theme.border_normal  = "#777777"
 theme.border_focus  = "#C34040"
+theme.useless_gap = "8"
 theme.useless_gap_width = "15"
 
 -- {{{ Titlebars

@@ -72,8 +72,8 @@ modkey = "Mod4"
 
 -- Table of layouts to cover with awful.layout.inc, order matters.
 awful.layout.layouts = {
-  lain.layout.uselesstile,
-  lain.layout.uselesstile.bottom,
+  awful.layout.suit.tile,
+  awful.layout.suit.tile.bottom,
   lain.layout.centerworkd,
   lain.layout.termfair,
   awful.layout.suit.floating
