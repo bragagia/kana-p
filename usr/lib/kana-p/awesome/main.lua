@@ -619,7 +619,7 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 --- {{{ Rounded window corner
 client.connect_signal("property::geometry", function (c)
   gears.timer.delayed_call(function()
-    gears.surface.apply_shape_bounding(c, gears.shape.rounded_rect, 3)
+    gears.surface.apply_shape_bounding(c, gears.shape.rounded_rect, 5)
   end)
 end)
 --- }}}
