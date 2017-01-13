@@ -4,7 +4,7 @@
 
 xset b off
 xset s off -dpms
-xrdb -load /usr/share/kana-p/Xresources
+xrdb -load /usr/lib/kana-p/config/Xresources
 if [ -f "$HOME""/.Xresources" ]; then
 	xrdb -load "$HOME""/.Xresources"
 fi
@@ -19,13 +19,13 @@ export XDG_DATA_DIRS="/usr/local/share:/usr/share"
 export XDG_CONFIG_DIRS="/etc/xdg"
 
 if [ ! -f "$HOME""/.xsettingsd" ]; then
-	cp /usr/share/kana-p/xsettingsd "$HOME""/.xsettingsd"
+	cp /usr/lib/kana-p/config/xsettingsd "$HOME""/.xsettingsd"
 fi
 xsettingsd -c "$HOME""/.xsettingsd" &
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 
 if [ ! -f "$XDG_CONFIG_HOME""/volumeicon/kana-p" ]; then
-	cp /usr/share/kana-p/volumeicon "$XDG_CONFIG_HOME""/volumeicon/kana-p"
+	cp /usr/lib/kana-p/config/volumeicon "$XDG_CONFIG_HOME""/volumeicon/kana-p"
 fi
 
 ### Drivers
@@ -69,14 +69,14 @@ fi
 
 if [ -z "$NO_WM" ]; then
 	xdg_menu --format awesome --root-menu /etc/xdg/menus/arch-applications.menu > /tmp/kana-p-$USER-xdg_menu.lua
-	awesome -c /usr/share/kana-p/awesome/main.lua &
+	awesome -c /usr/lib/kana-p/awesome/main.lua &
 	awes_pid=$!
 	trap "kill -9 $awes_pid" EXIT
 fi
 
 sleep 0.5
 
-autohidewibox.py &
+/usr/lib/kana-p/utils/autohidewibox.py &
 
 dex -a -e Awesome
 
