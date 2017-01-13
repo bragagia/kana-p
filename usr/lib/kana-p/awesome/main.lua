@@ -8,7 +8,7 @@ local wibox = require("wibox")
       beautiful = require("beautiful")
 -- Notification library
 local naughty = require("naughty")
-local menubar = require("menubar")
+      menubar = require("menubar")
       hotkeys_popup = require("awful.hotkeys_popup").widget
 local lain      = require("lain")
 
