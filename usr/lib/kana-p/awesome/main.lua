@@ -74,7 +74,7 @@ modkey = "Mod4"
 awful.layout.layouts = {
   awful.layout.suit.tile,
   awful.layout.suit.tile.bottom,
-  lain.layout.centerworkd,
+  lain.layout.centerwork,
   lain.layout.termfair,
   awful.layout.suit.floating
 }
