@@ -4,9 +4,9 @@
 
 xset b off
 xset s off -dpms
-xrdb -load /usr/lib/kana-p/config/Xresources
+xrdb /usr/lib/kana-p/config/Xresources
 if [ -f "$HOME""/.Xresources" ]; then
-	xrdb -load "$HOME""/.Xresources"
+	xrdb -override "$HOME""/.Xresources"
 fi
 synclient HorizTwoFingerScroll=1
 
