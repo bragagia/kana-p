@@ -125,8 +125,8 @@ depends=(
 	'srandrd'
 
 	'lightdm'
-	'lightdm-webkit-greeter'
-	'lightdm-webkit-theme-bevel-git'
+	'lightdm-webkit2-greeter'
+	'lightdm-webkit2-theme-bevel-git'
 	'i3lock-wrapper'
 
 	'compton'
