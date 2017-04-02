@@ -72,7 +72,7 @@ elif [[ $mode == "install" ]]; then
 	sed -i "s#^\#display-setup-script=.*\$#display-setup-script=/usr/bin/kana-p-screen -d#g" /etc/lightdm/lightdm.conf
 	sed -i "s#^\#greeter-session=.*\$#greeter-session=lightdm-webkit2-greeter#g" /etc/lightdm/lightdm.conf
 	#sed -i "s#^background_images *=.*\$#background_images = /usr/share/backgrounds/#g" /etc/lightdm/lightdm-webkit2-greeter.conf
-	sed -i "s#^webkit-theme *=.*\$#webkit-theme        = Bevel#g" /etc/lightdm/lightdm-webkit2-greeter.conf
+	sed -i "s#^webkit_theme *=.*\$#webkit_theme        = Bevel#g" /etc/lightdm/lightdm-webkit2-greeter.conf
 	sed -i "s#-blur 0x3 #-scale 5% -scale 2000% #g" /usr/bin/i3lock-wrapper
 
 elif [[ $mode == "uninstall" ]]; then
@@ -88,6 +88,6 @@ elif [[ $mode == "uninstall" ]]; then
 	sed -i "s#display-setup-script=/usr/bin/kana-p-screen -d#\#display-setup-script=#g" /etc/lightdm/lightdm.conf
 	sed -i "s#^greeter-session=lightdm-webkit2-greeter\$#\#greeter-session=#g" /etc/lightdm/lightdm.conf
 	#sed -i 's#^background_images *= */usr/share/backgrounds/$#background_images =#g' /etc/lightdm/lightdm-webkit2-greeter.conf
-	sed -i "s#^webkit-theme *= *Bevel\$#webkit-theme        = webkit#g" /etc/lightdm/lightdm-webkit2-greeter.conf
+	sed -i "s#^webkit_theme *= *Bevel\$#webkit_theme        = webkit#g" /etc/lightdm/lightdm-webkit2-greeter.conf
 	sed -i "s#-scale 5% -scale 2000% #-blur 0x3 #g" /usr/bin/i3lock-wrapper
 fi
