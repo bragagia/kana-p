@@ -134,7 +134,7 @@ mylauncher:buttons(awful.util.table.join( awful.button({ }, 1, function () mymai
 mytextclock = awful.widget.textclock(markup(beautiful.info_value, "%d %B ") .. markup(beautiful.info_spacer, ">") .. markup(beautiful.info_value, " %H:%M "))
 
 -- Battery
-batwidget = lain.widgets.bat({
+batwidget = lain.widget.bat({
     timeout = 1,
     settings = function()
         local status
@@ -157,14 +157,14 @@ batwidget = lain.widgets.bat({
 })
 
 -- CPU
-cpuwidget = lain.widgets.cpu({
+cpuwidget = lain.widget.cpu({
     settings = function()
         widget:set_markup(markup(beautiful.info_cpu, "c ") .. markup(beautiful.info_value, cpu_now.usage))
     end
 })
 
 -- MEM
-memwidget = lain.widgets.mem({
+memwidget = lain.widget.mem({
     settings = function()
       widget:set_markup(markup(beautiful.info_mem, "r ") .. markup(beautiful.info_value, mem_now.used))
     end
@@ -173,7 +173,7 @@ memwidget = lain.widgets.mem({
 -- Net usage
 netdownwidget = wibox.widget.textbox()
 
-netupwidget = lain.widgets.net({
+netupwidget = lain.widget.net({
     notify = "off",
     settings = function()
         widget:set_markup(markup(beautiful.info_upload, "u ") .. markup(beautiful.info_value, string.format("%.2f", net_now.sent / 1024)))
@@ -199,7 +199,7 @@ wifi_timer:connect_signal("timeout", wifiInfo)
 wifi_timer:start()
 
 -- Volume
-volumewidget = lain.widgets.alsa({
+volumewidget = lain.widget.alsa({
     settings = function()
         if volume_now.status == "off" then
             widget:set_markup(markup(beautiful.info_volume, "v ") .. markup(beautiful.info_value, "M"))
