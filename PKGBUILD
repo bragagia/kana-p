@@ -156,8 +156,7 @@ depends=(
 	'numix-bevel-icon-theme'
 	'gtk-theme-arc-git'
 
-	'rxvt-unicode-pixbuf'
-	'rxvt-unicode-terminfo'
+	'termite'
 )
 makedepends=('git')
 optdepends=()

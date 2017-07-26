@@ -1,9 +1,12 @@
+local xresources = require("beautiful.xresources")
+local dpi = xresources.apply_dpi
+
 -- {{{ Main
 theme = {}
 -- }}}
 
 -- {{{ Styles
-theme.font      = "Misc Ohsnap 8"
+theme.font      = "DejaVu Sans Mono 8"
 
 theme.confdir                       = "/usr/lib/kana-p/awesome/images"
 
@@ -28,12 +31,12 @@ theme.taglist_squares_unsel         = theme.confdir .. "/taglist/square.png"
 theme.fg_normal = "#898f9a"
 theme.fg_focus  = "#ffffff"
 theme.fg_urgent = "#d01e2d"
-theme.bg_normal = "#2F343F"
-theme.bg_focus  = "#2F343F"
-theme.bg_urgent = "#2F343F"
+theme.bg_normal = "#000000"
+theme.bg_focus  = "#000000"
+theme.bg_urgent = "#000000"
 -- }}}
 
-theme.bg_systray = "#2F343F"
+theme.bg_systray = "#000000"
 
 theme.notif_fg = "#000000"
 theme.notif_bg = "#91EBE9"
@@ -71,7 +74,7 @@ theme.titlebar_bg_normal = "#2F343F"
 
 theme.menu_bg_normal = "#000000"
 theme.menu_bg_focus = "#00000000"
-theme.menu_width = 200
+theme.menu_width = dpi(200)
 theme.menu_submenu_icon      = "/usr/share/awesome/themes/default/submenu.png"
 
 -- }}}

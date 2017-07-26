@@ -74,8 +74,8 @@ globalkeys = awful.util.table.join(
               {description = "select previous", group = "layout"}),
 
     -- Special keys
-    awful.key({                   }, "XF86MonBrightnessUp", function () os.execute("light -A 5") end),
-    awful.key({                   }, "XF86MonBrightnessDown", function () os.execute("light -U 5") end),
+    awful.key({                   }, "XF86MonBrightnessUp", function () os.execute("light -A 2") end),
+    awful.key({                   }, "XF86MonBrightnessDown", function () os.execute("light -U 2") end),
     awful.key({                   }, "XF86Sleep", function () os.execute("systemctl suspend") end),
     awful.key({                   }, "XF86Display", function () os.execute("kana-p-screen") end),
     awful.key({                   }, "Print", function () os.execute("scrot -e 'mv $f ~/Images/shots/'") end),

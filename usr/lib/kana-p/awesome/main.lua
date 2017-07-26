@@ -11,6 +11,8 @@ local naughty = require("naughty")
       menubar = require("menubar")
       hotkeys_popup = require("awful.hotkeys_popup").widget
 local lain      = require("lain")
+local xresources = require("beautiful.xresources")
+local dpi = xresources.apply_dpi
 
 -- Handle runtime errors after startup
 do
@@ -332,7 +334,7 @@ awful.screen.connect_for_each_screen(function(s)
     ))
 
     -- Create the wibox
-    s.mywibox = awful.wibar({ position = "top", screen = s })
+    s.mywibox = awful.wibar({ position = "top", screen = s, height = dpi(17)})
     s.mywibox.forcevisible = true
 
     -- Add widgets to the wibox
@@ -575,10 +577,10 @@ client.connect_signal("request::titlebars", function(c)
 
     local spacer = wibox.widget.textbox(" ")
 
-    awful.titlebar(c, {size = "18"}) : setup {
+    awful.titlebar(c, {size = dpi(18)}) : setup {
         { -- Left
             spacer,
-            wibox.container.margin(awful.titlebar.widget.iconwidget(c), 2, 3, 3, 2),
+            wibox.container.margin(awful.titlebar.widget.iconwidget(c), dpi(2), dpi(3), dpi(3), dpi(2)),
             spacer,
             buttons = buttons,
             layout  = wibox.layout.fixed.horizontal
@@ -595,9 +597,9 @@ client.connect_signal("request::titlebars", function(c)
             --awful.titlebar.widget.floatingbutton (c),
             --awful.titlebar.widget.stickybutton   (c),
             --awful.titlebar.widget.ontopbutton    (c),
-            wibox.container.margin(awful.titlebar.widget.minimizebutton (c), 2, 3, 3, 2),
-            wibox.container.margin(awful.titlebar.widget.maximizedbutton(c), 2, 3, 3, 2),
-            wibox.container.margin(awful.titlebar.widget.closebutton(c), 2, 3, 3, 2),
+            wibox.container.margin(awful.titlebar.widget.minimizebutton (c), dpi(2), dpi(3), dpi(3), dpi(2)),
+            wibox.container.margin(awful.titlebar.widget.maximizedbutton(c), dpi(2), dpi(3), dpi(3), dpi(2)),
+            wibox.container.margin(awful.titlebar.widget.closebutton(c), dpi(2), dpi(3), dpi(3), dpi(2)),
             layout = wibox.layout.fixed.horizontal()
         },
         layout = wibox.layout.align.horizontal
@@ -622,7 +624,7 @@ client.connect_signal("property::geometry", function (c)
 		if c.maximized then
 				gears.surface.apply_shape_bounding(c, gears.shape.rectangle)
 		else
-				gears.surface.apply_shape_bounding(c, gears.shape.rounded_rect, 5)
+				gears.surface.apply_shape_bounding(c, gears.shape.rounded_rect, math.floor(dpi(7)/2)*2)
 		end
   end)
 end)
