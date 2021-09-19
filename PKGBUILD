@@ -172,7 +172,7 @@ conflicts=(
 replaces=()
 backup=()
 options=()
-install=.install
+install=install
 changelog=
 source=("$pkgname::git+https://github.com/bragagia/kana-p#branch=master")
 noextract=()
@@ -180,6 +180,7 @@ md5sums=('SKIP')
 
 package() {
 	mv -T $srcdir/$pkgname $pkgdir
+	rm -rf $pkgdir/.git
 	rm -f $pkgdir/.gitignore
 	rm -f $pkgdir/LICENSE
 	rm -f $pkgdir/README.md
