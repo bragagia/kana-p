@@ -39,6 +39,15 @@ Feel free to fork and publish your own version of this package and/or send a pul
 
 ## Installation
 
+Clone this repository, and then install it with makepkg :
+```
+clone https://github.com/bragagia/kana-p
+cd kana-p
+makepkg --noextract -si
+```
+
+Old doc:
+
 I recommend to install this package from a fresh install but this is not mandatory.
 
 Just follow the [Installation Guide](https://wiki.archlinux.org/index.php/Installation_guide) and start from that.

@@ -48,7 +48,7 @@ fi
 
 ### Composition manager
 
-compton -fcCz -r 9 -o 0.8 -l -13 -t 0 -I 0.08 -O 0.08 -D 20 --opacity-rule '92:class_g *?= "URxvt" && focused' --opacity-rule '65:class_g *?= "URxvt" && !focused' --blur-background --blur-kern 7x7box --blur-background-exclude '!class_g *?= "URxvt"' &
+compton -fcCz -r 9 -o 0.8 -l -13 -t 0 -I 0.1 -O 0.08 &
 
 ### Lock
 
@@ -68,16 +68,14 @@ fi
 ### WM
 
 if [ -z "$NO_WM" ]; then
-	xdg_menu --format awesome --root-menu /etc/xdg/menus/arch-applications.menu > /tmp/kana-p-$USER-xdg_menu.lua
-	awesome -c /usr/lib/kana-p/awesome/main.lua &
+	i3 &
 	awes_pid=$!
 	trap "kill -9 $awes_pid" EXIT
 fi
 
 sleep 0.5
 
-/usr/lib/kana-p/utils/autohidewibox.py &
-
+polybar bar &
 dex -a -e Awesome
 
 wait $service_pid
