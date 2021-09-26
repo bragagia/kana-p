@@ -1,2 +1,4 @@
 *~
 *.swp
+/kana-p-*.pkg.tar.zst
+/pkg
