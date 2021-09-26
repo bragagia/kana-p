@@ -1,43 +1,59 @@
-# Kana-P: Lite Archlinux complete desktop
-
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-
-
-- [Intro](#intro)
-- [Installation](#installation)
-  - [With an AUR-helper](#with-an-aur-helper)
-  - [Without AUR-helper](#without-aur-helper)
-- [User Guide](#user-guide)
-  - [Quick start](#quick-start)
-    - [Top bar](#top-bar)
-  - [Set a wallpaper](#set-a-wallpaper)
-  - [Launch something at startup](#launch-something-at-startup)
-
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+# Kana-P: Because it's better to work in a kana-p
 
 ## Intro
 
-Kana-p is a package which install and configure quickly everything you need on your Archlinux:
+This is my personnal ArchLinux auto-installer. Feel free to fork or ask me any question.
+
 
 - Awesome WM as desktop manager (tilling)
 - LightDM as login manager
 - Compton as compositor
-- URxvt as terminal
+- Termite as terminal
+- i3-gaps
 - Wi-Fi and Bluetooth working
 - USB mount-on-connect
 - Automatic screen managing, just connect them
 - All great fonts installed
 - All this comes with beautiful themes and complete configuration
-- No preinstalled desktop app
 
 ![Kana-p demo](http://i.imgur.com/ScrXe7A.png)
 
 The goal of this project is to provide an easy to install ArchLinux configuration, but also easy to modify and to understand.
 
-Feel free to fork and publish your own version of this package and/or send a pull request.
-
 ## Installation
+
+Begin arch installtion by following official guide: https://wiki.archlinux.org/title/installation_guide
+
+Once installed and still in arch-chroot, install base-devel and git :
+```
+pacman -S base-devel git
+```
+
+Create your user as specified here : https://wiki.archlinux.org/title/Users_and_groups#User_management
+Define your password with :
+```
+passwd USERNAME
+```
+
+Add your user to the sudoers file : https://wiki.archlinux.org/title/sudo#Example_entries
+
+Login as your newly created user :
+```
+su USERNAME
+cd
+```
+
+Setup zsh :
+```
+chsh -s $(which zsh)
+```
+
+Install yay or your prefered AUR package manager :
+```
+git clone https://aur.archlinux.org/yay.git
+cd yay
+makepkg -si
+```
 
 Clone this repository, and then install it with makepkg :
 ```

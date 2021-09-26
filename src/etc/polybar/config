@@ -1,0 +1,370 @@
+[global/wm]
+margin-top = 5
+margin-bottom = 2
+
+
+[colors]
+orange = #d79921
+darkgray = #444444
+white = #f9f5d7
+gray = #585858
+black = #090909
+red = #db3f3f
+blue = #95aec7
+yellow = #c7ae95
+green = #aec795
+background = #e6141414
+foreground = #f9f5d7
+primary = #111313
+secondary = #d79921
+alert = #db2f2f
+
+[bar/bar]
+monitor = eDP-1
+bottom = false
+override-redirect = false
+wm_stack = i3
+width = 100%
+height = 30
+offset-x = 
+offset-y = 
+
+border-top-size = 6
+border-left-size = 16
+border-right-size = 16
+border-bottom-size = 1
+border-top-color = ${colors.background}
+border-left-color = ${colors.background}
+border-right-color = ${colors.background}
+border-bottom-color = ${colors.background}
+
+padding-left = 0
+padding-right = 0
+
+module-margin-right = 1
+module-margin-left = 1
+
+modules-left = menu0 vpncheck weather pkg wintitle
+modules-center = i3
+modules-right = backlight pavolume temperature memory cpu bluetooth eth wlan battery date
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+underline-size = 3
+underline-color = ${colors.orange}
+
+#tray-detached = false
+#tray-position = right
+#tray-offset-x = 0
+#tray-offset-y = 0
+#tray-maxsize = 16
+#tray-padding = 0
+
+font-0 = "FontAwesome:size=15"
+font-1 = "Inconsolata for Powerline:size=15"
+font-2 = "DejaVu Sans:size=15"
+
+[module/xwindow]
+type = internal/xwindow
+#format-underline = ${colors.background}
+label = %title%
+label-maxlen = 30
+
+[module/i3]
+type = internal/i3
+format = <label-state> <label-mode>
+index-sort = false
+wrapping-scroll = false
+strip-wsnumbers = true
+pin-workspaces = false
+enable-click = true
+
+label-mode-padding = 1
+label-mode-foreground = #db3f3f
+label-mode-background = 
+
+label-focused = %name%
+label-focused-background = 
+label-focused-underline = ${colors.orange}
+label-focused-padding = 1
+
+label-unfocused = %name%
+label-unfocused-padding = 1
+
+label-urgent = %name%!
+label-urgent-foreground = ${colors.red}
+label-urgent-padding = 1
+
+label-visible = %name%
+label-visible-background = ${self.label-focused-background}
+label-visible-underline = ${self.label-focused-underline}
+label-visible-padding = ${self.label-focused-padding}
+
+[module/backlight]
+type = internal/xbacklight
+
+format = <label>
+format-padding = 1
+format-underline = ${colors.green}
+label =  %percentage%
+
+bar-width = 6
+bar-indicator = 
+bar-indicator-foreground = ${colors.white}
+bar-fill = 
+bar-fill-foreground = ${colors.white}
+bar-empty = 
+bar-empty-foreground = #282a2e
+
+[module/date]
+type = internal/date
+date = %A %d %b  %H:%M
+interval = 5
+format-underline = #B8BB26
+format-foreground = ${colors.foreground}
+format-padding = 1
+
+[module/volume]
+type = internal/volume
+
+format-volume = <ramp-volume> <label-volume> 
+format-volume-padding = 1
+label-muted-padding = 1
+
+format-volume-underline = ${colors.blue}
+
+label-volume = %percentage%
+
+label-muted =  
+label-muted-underline = ${colors.orange}
+
+ramp-volume-0 = 
+ramp-volume-1 = 
+ramp-volume-2 = 
+
+[module/battery]
+type = internal/battery
+battery = BAT0
+adapter = AC
+full-at = 100
+interval = 1
+
+format-charging = <animation-charging> <label-charging>
+label-charging = "%percentage%↑"
+format-charging-underline = ${colors.orange}
+format-charging-padding = 1
+
+time-format = %H:%M
+#label-discharging = %percentage%% - %time%
+label-discharging = %percentage%↓
+format-discharging = <ramp-capacity> <label-discharging> 
+format-discharging-underline = ${colors.orange}
+format-discharging-padding = 1
+
+label-full = %percentage%↑
+format-full = <ramp-capacity> <label-full>
+format-full-underline = ${self.format-charging-underline}
+format-full-overline = ${self.format-charging-underline}
+format-full-padding = 1
+
+ramp-capacity-0 = 
+ramp-capacity-1 = 
+ramp-capacity-2 = 
+ramp-capacity-3 = 
+ramp-capacity-4 = 
+ramp-capacity-foreground = ${colors.foreground}
+
+animation-charging-0 = 
+animation-charging-1 = 
+animation-charging-2 = 
+animation-charging-3 = 
+animation-charging-4 = 
+animation-charging-foreground = ${colors.foreground}
+animation-charging-framerate = 1000
+
+[module/temperature]
+type = internal/temperature
+thermal-zone = 3
+warn-temperature = 65
+interval = 5
+
+format = <ramp> <label>
+format-underline = ${colors.orange}
+format-warn = <ramp> <label-warn>
+format-warn-underline = ${colors.red}
+
+format-padding = 1
+format-warn-padding = 1
+
+label = %temperature-c%
+label-warn = %temperature-c%
+
+ramp-0 = 
+ramp-1 = 
+ramp-2 = 
+ramp-foreground = #f9f5d7
+
+[module/cpu]
+format-label = internal/cpu
+
+#format = <label> <ramp-coreload>
+fotmat = <label>
+
+ramp-coreload-0 = ▁
+ramp-coreload-1 = ▂
+ramp-coreload-2 = ▃
+ramp-coreload-3 = ▄
+ramp-coreload-4 = ▅
+ramp-coreload-5 = ▆
+ramp-coreload-6 = ▇
+ramp-coreload-7 = █
+ramp-coreload-underline = ${colors.orange}
+
+type = internal/cpu
+interval = 2
+label = %{F${colors.white} %percentage%  
+label-underline = ${colors.orange}
+label-padding = 1
+
+[module/memory]
+type = internal/memory
+interval = 2
+
+label =  %percentage_used%
+label-underline = ${colors.orange}
+label-foreground = ${colors.white}
+label-padding = 1
+
+[module/vpncheck]
+type = custom/script
+exec = pgrep openvpn
+interval = 5
+label = vpn
+format-underline = #458588
+format-prefix = " "
+format-prefix-foreground = #5b
+
+[module/wlan]
+type = internal/network
+interface = wlp2s0
+interval = 1
+
+format-connected-padding = 1
+format-disconnected-padding = 0
+
+format-connected = <label-connected>
+format-connected-underline = ${colors.blue}
+format-disconnected-underline = ${colors.gray}
+
+label-connected = %{A1:~/.config/polybar/wifi.sh:} %essid%%{A}
+label-disconnected = %{A1:~/.config/polybar/wifi.sh:} %{A}
+label-disconnected-foreground = ${colors.gray}
+
+[module/eth]
+type = internal/network
+interface = enp2s0
+interval = 5
+
+format-connected-padding = 1
+format-disconnected-padding = 0
+
+format-connected-underline = #458588
+format-disconnected-underline = ${colors.gray}
+
+label-connected =  %linkspeed%
+label-disconnected =  
+label-disconnected-foreground = ${colors.white}
+
+
+[module/filesystem]
+type = internal/fs
+interval = 25
+
+mount-0 = /
+
+label-mounted =  %percentage_used%%
+label-mounted-underline = ${colors.orange}
+label-mounted-padding = 1
+
+label-unmounted =
+label-unmounted-foreground = ${colors.black}
+
+[module/menu0]
+type = custom/menu
+
+format = <label-toggle>
+format-underline = ${colors.orange}
+format-padding = 1
+
+label-open = 
+
+[module/pkg]
+type = custom/script
+interval = 30
+format = <label>
+format-underline = #dc322f
+label = "%output%"
+exec = ~/.config/polybar/pkg.sh
+exec-if = "ping -q -w 2 -c 1 176.34.135.167 > /dev/null"
+
+[module/weather]
+type = custom/script
+interval = 10
+format = <label>
+format-prefix = " "
+format-underline = #B8BB26
+exec = ~/.config/polybar/weather
+
+[module/bluetooth]
+type = custom/script
+interval = 10
+format = <label>
+format-underline = #B8BB26
+exec = ~/.config/polybar/bluetooth.sh
+click-left = ~/.config/polybar/bluetooth-launch.sh
+
+[module/cur-xbt]
+type = custom/script
+interval = 30
+format = <label>
+format-underline = ${colors.blue}
+format-prefix = " "
+exec = ~/.config/polybar/currency.sh XBT
+
+[module/cur-eth]
+type = custom/script
+interval = 30
+format = <label>
+format-underline = ${colors.orange}
+format-prefix = " "
+exec = ~/.config/polybar/currency.sh ETH
+
+[module/cur-ltc]
+type = custom/script
+interval = 30
+format = <label>
+format-underline = ${colors.red}
+format-prefix = " "
+exec = ~/.config/polybar/currency.sh LTC
+
+[module/wintitle]
+type = internal/xwindow
+
+format-underline = #B8BB26
+
+label = %title%
+label-maxlen = 50
+
+[module/pavolume]
+type = custom/script
+
+label = %output%
+format-underline = ${colors.blue}
+
+tail = true
+exec = pavolume --listen
+click-right = exec pavucontrol
+click-left = pavolume --togmute
+scroll-up = pavolume --up
+scroll-down = pavolume --down

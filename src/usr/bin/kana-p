@@ -48,16 +48,12 @@ fi
 
 ### Composition manager
 
-compton -fcCz -r 9 -o 0.8 -l -13 -t 0 -I 0.1 -O 0.08 &
+compton -fcC -r 9 -o 0.8 -l -13 -t 0 -I 0.1 -O 0.08 &
 
 ### Lock
 
 #xss-lock i3lock-wrapper -e &
 #trap "killall xss-lock" EXIT
-
-### Tray
-
-volumeicon -c kana-p &
 
 ### User scripts
 
@@ -68,14 +64,14 @@ fi
 ### WM
 
 if [ -z "$NO_WM" ]; then
-	i3 &
+	i3 -c /etc/i3/config-kana-p &
 	awes_pid=$!
 	trap "kill -9 $awes_pid" EXIT
 fi
 
 sleep 0.5
 
-polybar bar &
+polybar -c /etc/polybar/config bar &
 dex -a -e Awesome
 
 wait $service_pid
